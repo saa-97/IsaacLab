@@ -207,8 +207,6 @@ def compute_stalling_penalty(env):
     penalty = -1.0 * condition
     return penalty.mean(dim=1)
 
-
-
 def compute_exploration_reward(env, task_reward_tracker=0.0, is_terminal=False, remove_threshold=0.5):
 
     v = env.scene["robot"].data.root_com_lin_vel_w[:, :3]    # shape [N, 3]
