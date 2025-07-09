@@ -15,8 +15,9 @@ from isaaclab.managers import RewardTermCfg as RewTerm
 from isaaclab.managers import SceneEntityCfg
 from isaaclab.managers import TerminationTermCfg as DoneTerm
 from isaaclab.utils import configclass
-from isaaclab.utils.assets import ISAACLAB_NUCLEUS_DIR
+from isaaclab.utils.assets import ISAAC_NUCLEUS_DIR, ISAACLAB_NUCLEUS_DIR
 from isaaclab_tasks.manager_based.manipulation.stack.mdp import franka_stack_events
+import isaaclab.sim as sim_utils
 
 import isaaclab_tasks.manager_based.navigation.mdp as mdp
 from isaaclab_tasks.manager_based.locomotion.velocity.config.anymal_c.flat_env_cfg import AnymalCFlatEnvCfg
@@ -33,7 +34,7 @@ class EventCfg:
         params={
             "pose_range": {"x": (0.4, 0.6), "y": (-0.10, 0.10), "z": (0.0203, 0.0203), "yaw": (-1.0, 1, 0)},
             "min_separation": 0.1,
-            "asset_cfgs": [SceneEntityCfg("cube_1")],
+            "asset_cfgs": [SceneEntityCfg("cube")],
         },
     )
     reset_base = EventTerm(
@@ -163,27 +164,6 @@ class NavigationEnvCfg_PLAY(NavigationEnvCfg):
     def __post_init__(self) -> None:
         # post init of parent
         super().__post_init__()
-        # # Rigid body properties of each cube
-        # cube_properties = RigidBodyPropertiesCfg(
-        #     solver_position_iteration_count=16,
-        #     solver_velocity_iteration_count=1,
-        #     max_angular_velocity=1000.0,
-        #     max_linear_velocity=1000.0,
-        #     max_depenetration_velocity=5.0,
-        #     disable_gravity=False,
-        # )
-
-        # # Set each stacking cube deterministically
-        # self.scene.cube_1 = RigidObjectCfg(
-        #     prim_path="{ENV_REGEX_NS}/Cube_1",
-        #     init_state=RigidObjectCfg.InitialStateCfg(pos=[0.4, 0.0, 0.0203], rot=[1, 0, 0, 0]),
-        #     spawn=UsdFileCfg(
-        #         usd_path=f"{ISAAC_NUCLEUS_DIR}/Props/Blocks/blue_block.usd",
-        #         scale=(1.0, 1.0, 1.0),
-        #         rigid_props=cube_properties,
-        #         semantic_tags=[("class", "cube_1")],
-        #     ),
-        # )
         # make a smaller scene for play
         self.scene.num_envs = 50
         self.scene.env_spacing = 2.5
