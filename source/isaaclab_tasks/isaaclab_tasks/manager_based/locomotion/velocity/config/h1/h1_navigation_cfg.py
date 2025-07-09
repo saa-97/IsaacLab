@@ -22,9 +22,12 @@ from isaaclab.utils.assets import ISAAC_NUCLEUS_DIR, ISAACLAB_NUCLEUS_DIR
 from isaaclab.utils.noise import AdditiveUniformNoiseCfg as Unoise
 # from omni.isaac.lab.terrains import TerrainImporterCfg  # Uncomment this line
 import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
+from isaaclab_tasks.manager_based.locomotion.velocity.config.h1.flat_env_cfg import H1FlatEnvCfg
 from isaaclab_assets import H1_MINIMAL_CFG  # isort: skip
 from isaaclab.assets import RigidObjectCfg  # Add this import
 from isaaclab.terrains.config.rough import ROUGH_TERRAINS_CFG  # isort: skip
+
+LOW_LEVEL_ENV_CONFG = H1FlatEnvCfg()
 
 # from omni.isaac.lab_tasks.manager_based.locomotion.velocity.mdp import UniformVelocityCommand
 
@@ -114,8 +117,14 @@ class CommandsCfg:
 class ActionsCfg:
     """Action specifications for the MDP."""
 
-    joint_pos = mdp.JointPositionActionCfg(asset_name="robot", joint_names=[".*"], scale=0.5, use_default_offset=True)
-
+    # joint_pos = mdp.JointPositionActionCfg(asset_name="robot", joint_names=[".*"], scale=0.5, use_default_offset=True)
+    pre_trained_policy_action: mdp.PreTrainedPolicyActionCfg = mdp.PreTrainedPolicyActionCfg (
+        asset_name="robot",
+        policy_path="/home/vc/IsaacLab/logs/rsl_rl/h1_flat/2025-07-09_16-47-24/exported/policy.pt",
+        low_level_decimation=4,
+        low_level_actions=LOW_LEVEL_ENV_CONFG.actions.joint_pos,
+        low_level_observations=LOW_LEVEL_ENV_CONFG.observations.policy,
+    )
 
 @configclass
 class ObservationsCfg:
