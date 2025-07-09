@@ -1,25 +1,106 @@
 #Rough_env_cfg from Manager Based RL, Config H1.
 
-from omni.isaac.lab.managers import RewardTermCfg as RewTerm
-from omni.isaac.lab.managers import SceneEntityCfg
-from omni.isaac.lab.utils import configclass
-from omni.isaac.lab.managers import CurriculumTermCfg as CurrTerm
+from __future__ import annotations
+
+from isaaclab.managers import RewardTermCfg as RewTerm
+from isaaclab.managers import SceneEntityCfg
+from isaaclab.utils import configclass
+from isaaclab.managers import CurriculumTermCfg as CurrTerm
 import torch
-from omni.isaac.lab.managers import CommandTermCfg
+from isaaclab.managers import CommandTermCfg
+from isaaclab.managers import CurriculumTermCfg as CurrTerm
+from isaaclab.managers import EventTermCfg as EventTerm
+from isaaclab.managers import ObservationGroupCfg as ObsGroup
+from isaaclab.managers import ObservationTermCfg as ObsTerm
+from isaaclab.utils.noise import AdditiveUniformNoiseCfg as Unoise
 # source/isaaclab_tasks/isaaclab_tasks/manager_based/manipulation/reach/mdp/rewards.py
 
-import omni.isaac.lab_tasks.manager_based.navigation.mdp as mdp
-import omni.isaac.lab_tasks.manager_based.locomotion.velocity.mdp as mdp
-from omni.isaac.lab_tasks.manager_based.locomotion.velocity.velocity_env_cfg import LocomotionVelocityRoughEnvCfg, RewardsCfg
+import isaaclab_tasks.manager_based.navigation.mdp as mdpa
+import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
+from isaaclab_tasks.manager_based.locomotion.velocity.velocity_env_cfg import LocomotionVelocityRoughEnvCfg, RewardsCfg
 # from omni.isaac.lab.managers import TimedataCfg
 ##
 # Pre-defined configs
 ##
-from omni.isaac.lab_assets import H1_MINIMAL_CFG  # isort: skip
+from isaaclab_assets import H1_MINIMAL_CFG  # isort: skip
 
 import math
 
 
+
+@configclass
+class ObservationsCfg:
+    """Observation specifications for the MDP."""
+
+    @configclass
+    class PolicyCfg(ObsGroup):
+        """Observations for policy group."""
+        pose_command = ObsTerm(func=mdp.generated_commands, params={"command_name": "pose_command"})
+
+        # observation terms (order preserved)
+        base_lin_vel = ObsTerm(func=mdp.base_lin_vel, noise=Unoise(n_min=-0.1, n_max=0.1))
+        base_ang_vel = ObsTerm(func=mdp.base_ang_vel, noise=Unoise(n_min=-0.2, n_max=0.2))
+        projected_gravity = ObsTerm(
+            func=mdp.projected_gravity,
+            noise=Unoise(n_min=-0.05, n_max=0.05),
+        )
+        velocity_commands = ObsTerm(func=mdp.generated_commands, params={"command_name": "base_velocity"})
+        joint_pos = ObsTerm(func=mdp.joint_pos_rel, noise=Unoise(n_min=-0.01, n_max=0.01))
+        joint_vel = ObsTerm(func=mdp.joint_vel_rel, noise=Unoise(n_min=-1.5, n_max=1.5))
+        actions = ObsTerm(func=mdp.last_action)
+        height_scan = ObsTerm(
+            func=mdp.height_scan,
+            params={"sensor_cfg": SceneEntityCfg("height_scanner")},
+            noise=Unoise(n_min=-0.1, n_max=0.1),
+            clip=(-1.0, 1.0),
+        )
+
+#added code
+        time_left = ObsTerm(
+            func=lambda env: (
+                env.command_manager.get_term("pose_command").time_left / 
+                env.command_manager.get_term("pose_command").cfg.resampling_time_range[1]
+            ).unsqueeze(-1),
+            scale=1.0,
+            clip=(0.0, 1.0)
+        )
+
+        target_position = ObsTerm(
+            func=lambda env: (
+                (env.command_manager.get_term("pose_command").pos_command_w[:, :2] - 
+                env.scene["robot"].data.root_link_pos_w[:, :2]).view(-1, 2)  # Ensure shape (num_envs, 2)
+            ),
+            noise=Unoise(n_min=-0.1, n_max=0.1),
+            scale=0.2,
+            clip=(-1.0, 1.0)
+        )
+
+        def __post_init__(self):
+            self.enable_corruption = True
+            self.concatenate_terms = True
+
+    # observation groups
+    policy: PolicyCfg = PolicyCfg()
+
+
+@configclass
+class CommandsCfg:
+    """Command specifications for the MDP."""
+
+
+
+    pose_command = mdp.UniformPose2dCommandCfg(
+        asset_name="robot",
+        simple_heading=False,
+        resampling_time_range=(8, 8),
+        debug_vis=True,
+        # Generate a tensor with [pos_x, pos_y, heading]
+        ranges=mdp.UniformPose2dCommandCfg.Ranges(
+            pos_x=(-3.0, 3.0),
+            pos_y=(-3.0, 3.0),
+            heading=(-math.pi, math.pi)
+        ),
+    )
 
 
 @configclass
@@ -31,21 +112,21 @@ class H1Rewards(RewardsCfg):
 
 #code not being used now
 
-    position_tracking = RewTerm(
-        func=mdp.position_command_error_tanh,
-        weight=0.5,
-        params={"std": 4, "command_name": "pose_command"},
-    )
-    position_tracking_fine_grained = RewTerm(
-        func=mdp.position_command_error_tanh,
-        weight=0.5,
-        params={"std": 0.4, "command_name": "pose_command"},
-    )
-    orientation_tracking = RewTerm(
-        func=mdp.heading_command_error_abs,
-        weight=-0.2,
-        params={"command_name": "pose_command"},
-    )
+    # position_tracking = RewTerm(
+    #     func=mdpa.position_command_error_tanh,
+    #     weight=0.5,
+    #     params={"std": 4, "command_name": "pose_command"},
+    # )
+    # position_tracking_fine_grained = RewTerm(
+    #     func=mdpa.position_command_error_tanh,
+    #     weight=0.5,
+    #     params={"std": 0.4, "command_name": "pose_command"},
+    # )
+    # orientation_tracking = RewTerm(
+    #     func=mdpa.heading_command_error_abs,
+    #     weight=-0.2,
+    #     params={"command_name": "pose_command"},
+    # )
 
 
 #navigation related code from blind_3 paper
@@ -215,27 +296,28 @@ class H1RoughEnvCfg_PLAY(H1RoughEnvCfg):
 import math
 import torch
 from dataclasses import MISSING
-from omni.isaac.lab.utils.math import quat_rotate_inverse
-import omni.isaac.lab_tasks.manager_based.locomotion.velocity.mdp as mdp
-import omni.isaac.lab.sim as sim_utils
-from omni.isaac.lab.assets import ArticulationCfg, AssetBaseCfg
-from omni.isaac.lab.envs import ManagerBasedRLEnvCfg
-from omni.isaac.lab.managers import CurriculumTermCfg as CurrTerm
-from omni.isaac.lab.managers import EventTermCfg as EventTerm
-from omni.isaac.lab.managers import ObservationGroupCfg as ObsGroup
-from omni.isaac.lab.managers import ObservationTermCfg as ObsTerm
-from omni.isaac.lab.managers import RewardTermCfg as RewTerm
-from omni.isaac.lab.managers import SceneEntityCfg
-from omni.isaac.lab.managers import TerminationTermCfg as DoneTerm
-from omni.isaac.lab.scene import InteractiveSceneCfg
-from omni.isaac.lab.sensors import ContactSensorCfg, RayCasterCfg, patterns
-from omni.isaac.lab.utils import configclass
-from omni.isaac.lab.utils.assets import ISAAC_NUCLEUS_DIR, ISAACLAB_NUCLEUS_DIR
-from omni.isaac.lab.utils.noise import AdditiveUniformNoiseCfg as Unoise
+from isaaclab.utils.math import quat_rotate_inverse
+import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
+import isaaclab.sim as sim_utils
+from isaaclab.assets import ArticulationCfg, AssetBaseCfg
+from isaaclab.envs import ManagerBasedRLEnvCfg
+from isaaclab.managers import CurriculumTermCfg as CurrTerm
+from isaaclab.managers import EventTermCfg as EventTerm
+from isaaclab.managers import ObservationGroupCfg as ObsGroup
+from isaaclab.managers import ObservationTermCfg as ObsTerm
+from isaaclab.managers import RewardTermCfg as RewTerm
+from isaaclab.managers import SceneEntityCfg
+from isaaclab.managers import TerminationTermCfg as DoneTerm
+from isaaclab.scene import InteractiveSceneCfg
+from isaaclab.sensors import ContactSensorCfg, RayCasterCfg, patterns
+from isaaclab.terrains import TerrainImporterCfg
+from isaaclab.utils import configclass
+from isaaclab.utils.assets import ISAAC_NUCLEUS_DIR, ISAACLAB_NUCLEUS_DIR
+from isaaclab.utils.noise import AdditiveUniformNoiseCfg as Unoise
 # from omni.isaac.lab.terrains import TerrainImporterCfg  # Uncomment this line
-import omni.isaac.lab_tasks.manager_based.locomotion.velocity.mdp as mdp
-from omni.isaac.lab_assets import H1_MINIMAL_CFG
-from omni.isaac.lab.assets import RigidObjectCfg  # Add this import
+import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
+from isaaclab_assets import H1_MINIMAL_CFG  # isort: skip
+from isaaclab.assets import RigidObjectCfg  # Add this import
 
 # from omni.isaac.lab_tasks.manager_based.locomotion.velocity.mdp import UniformVelocityCommand
 
@@ -567,16 +649,14 @@ The functions can be passed to the :class:`omni.isaac.lab.managers.RewardTermCfg
 specify the reward function and its parameters.
 """
 
-from __future__ import annotations
 
-from __future__ import annotations
 
 import torch
 from typing import TYPE_CHECKING
 
-from omni.isaac.lab.assets import RigidObject
-from omni.isaac.lab.managers import SceneEntityCfg
-from omni.isaac.lab.utils.math import combine_frame_transforms, quat_error_magnitude, quat_mul
+from isaaclab.assets import RigidObject
+from isaaclab.managers import SceneEntityCfg
+from isaaclab.utils.math import combine_frame_transforms, quat_error_magnitude, quat_mul
 
 if TYPE_CHECKING:
     from isaaclab.envs import ManagerBasedRLEnv
@@ -586,17 +666,17 @@ import torch
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from omni.isaac.lab.envs import ManagerBasedRLEnv
+    from isaaclab.envs import ManagerBasedRLEnv
 
 import torch
 from typing import TYPE_CHECKING
 
-from omni.isaac.lab.managers import SceneEntityCfg
-from omni.isaac.lab.sensors import ContactSensor
-from omni.isaac.lab.utils.math import quat_rotate_inverse, yaw_quat
+from isaaclab.managers import SceneEntityCfg
+from isaaclab.sensors import ContactSensor
+from isaaclab.utils.math import quat_rotate_inverse, yaw_quat
 
 if TYPE_CHECKING:
-    from omni.isaac.lab.envs import ManagerBasedRLEnv
+    from isaaclab.envs import ManagerBasedRLEnv
 
 
 def feet_air_time(

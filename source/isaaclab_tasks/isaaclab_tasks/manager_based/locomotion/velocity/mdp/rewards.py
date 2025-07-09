@@ -14,6 +14,11 @@ from __future__ import annotations
 import torch
 from typing import TYPE_CHECKING
 
+from isaaclab.assets import RigidObject
+from isaaclab.managers import SceneEntityCfg
+from isaaclab.utils.math import combine_frame_transforms, quat_error_magnitude, quat_mul
+
+
 from isaaclab.envs import mdp
 from isaaclab.managers import SceneEntityCfg
 from isaaclab.sensors import ContactSensor
@@ -106,6 +111,136 @@ def track_ang_vel_z_world_exp(
     ang_vel_error = torch.square(env.command_manager.get_command(command_name)[:, 2] - asset.data.root_ang_vel_w[:, 2])
     return torch.exp(-ang_vel_error / std**2)
 
+def position_command_error_tanh(env: ManagerBasedRLEnv, std: float, command_name: str) -> torch.Tensor:
+    """Reward position tracking with tanh kernel."""
+    command = env.command_manager.get_command(command_name)
+    des_pos_b = command[:, :3]
+    distance = torch.norm(des_pos_b, dim=1)
+    return 1 - torch.tanh(distance / std)
+
+def heading_command_error_abs(env: ManagerBasedRLEnv, command_name: str) -> torch.Tensor:
+    """Penalize tracking orientation error."""
+    command = env.command_manager.get_command(command_name)
+    heading_b = command[:, 3]
+    return heading_b.abs()
+
+def position_command_error(env: ManagerBasedRLEnv, command_name: str, asset_cfg: SceneEntityCfg) -> torch.Tensor:
+    """Penalize tracking of the position error using L2-norm.
+
+    The function computes the position error between the desired position (from the command) and the
+    current position of the asset's body (in world frame). The position error is computed as the L2-norm
+    of the difference between the desired and current positions.
+    """
+    # extract the asset (to enable type hinting)
+    asset: RigidObject = env.scene[asset_cfg.name]
+    command = env.command_manager.get_command(command_name)
+    # obtain the desired and current positions
+    des_pos_b = command[:, :3]
+    des_pos_w, _ = combine_frame_transforms(asset.data.root_state_w[:, :3], asset.data.root_state_w[:, 3:7], des_pos_b)
+    curr_pos_w = asset.data.body_state_w[:, asset_cfg.body_ids[0], :3]  # type: ignore
+    return torch.norm(curr_pos_w - des_pos_w, dim=1)
+
+def position_command_error_tanh(
+    env: ManagerBasedRLEnv, std: float, command_name: str, asset_cfg: SceneEntityCfg
+) -> torch.Tensor:
+    """Reward tracking of the position using the tanh kernel.
+
+    The function computes the position error between the desired position (from the command) and the
+    current position of the asset's body (in world frame) and maps it with a tanh kernel.
+    """
+    # extract the asset (to enable type hinting)
+    asset: RigidObject = env.scene[asset_cfg.name]
+    command = env.command_manager.get_command(command_name)
+    # obtain the desired and current positions
+    des_pos_b = command[:, :3]
+    des_pos_w, _ = combine_frame_transforms(asset.data.root_state_w[:, :3], asset.data.root_state_w[:, 3:7], des_pos_b)
+    curr_pos_w = asset.data.body_state_w[:, asset_cfg.body_ids[0], :3]  # type: ignore
+    distance = torch.norm(curr_pos_w - des_pos_w, dim=1)
+    return 1 - torch.tanh(distance / std)
+
+def orientation_command_error(env: ManagerBasedRLEnv, command_name: str, asset_cfg: SceneEntityCfg) -> torch.Tensor:
+    """Penalize tracking orientation error using shortest path.
+
+    The function computes the orientation error between the desired orientation (from the command) and the
+    current orientation of the asset's body (in world frame). The orientation error is computed as the shortest
+    path between the desired and current orientations.
+    """
+    # extract the asset (to enable type hinting)
+    asset: RigidObject = env.scene[asset_cfg.name]
+    command = env.command_manager.get_command(command_name)
+    # obtain the desired and current orientations
+    des_quat_b = command[:, 3:7]
+    des_quat_w = quat_mul(asset.data.root_state_w[:, 3:7], des_quat_b)
+    curr_quat_w = asset.data.body_state_w[:, asset_cfg.body_ids[0], 3:7]  # type: ignore
+    return quat_error_magnitude(curr_quat_w, des_quat_w)
+
+def compute_terminal_reward(env, Tr=1.0):
+
+    time_left = env.command_manager.get_term("pose_command").time_left  # e.g., [N, M]
+    active = (time_left < Tr).float()  # still [N, M]
+    
+    xb = env.scene["robot"].data.root_link_pos_w[:, :3]  # [N, 3]
+    target = env.command_manager.get_term("pose_command").pos_command_w[:, :3]  # [N, 3] or [N, M, 3]
+    
+    if target.dim() == 2:
+        target = target.unsqueeze(1)  # becomes [N, 1, 3]
+    xb = xb.unsqueeze(1)  # becomes [N, 1, 3]
+    
+    dist2 = torch.sum((xb - target)**2, dim=-1)
+    
+    reward = active * (1.0 / Tr) * (1.0 / (1.0 + dist2))
+    return reward.mean(dim=1)
+
+def compute_stalling_penalty(env):
+    """
+    Computes a penalty for stalling far from the target, matching paper's r_stall.
+    """
+    v = torch.norm(env.scene["robot"].data.root_com_lin_vel_w[:, :3], dim=1, keepdim=True)
+    
+    xb = env.scene["robot"].data.root_link_pos_w[:, :3].unsqueeze(1)  # [N, 1, 3]
+    target = env.command_manager.get_term("pose_command").pos_command_w[:, :3]
+    if target.dim() == 2:
+        target = target.unsqueeze(1)  # [N, 1, 3]
+    dist = torch.norm(xb - target, dim=-1)
+    
+    condition = ((v < 0.1) & (dist > 0.5)).float()  # [N, 1]
+    penalty = -1.0 * condition
+    return penalty.mean(dim=1)
+
+
+
+def compute_exploration_reward(env, task_reward_tracker=0.0, is_terminal=False, remove_threshold=0.5):
+
+    v = env.scene["robot"].data.root_com_lin_vel_w[:, :3]    # shape [N, 3]
+    x = env.scene["robot"].data.root_link_pos_w[:, :3]       # shape [N, 3]
+    x_star = env.command_manager.get_term("pose_command").pos_command_w[:, :3]  # shape [N, 3]
+    
+    if x_star.dim() == 3:  
+        x_star = x_star.squeeze(1)  # now shape [N, 3]
+    
+    dot_prod = torch.sum(v * (x_star - x), dim=1)  # shape [N]
+    norm_v = torch.norm(v, dim=1) + 1e-6           # shape [N]
+    norm_diff = torch.norm(x_star - x, dim=1) + 1e-6  # shape [N]
+    r_bias = dot_prod / (norm_v * norm_diff)        # shape [N]
+    
+
+    if isinstance(task_reward_tracker, (int, float)):
+        task_reward_tracker = torch.tensor(task_reward_tracker, device=v.device, dtype=torch.float32).repeat(v.shape[0])
+    mask = (task_reward_tracker < remove_threshold).float()  # shape [N]
+    
+    return r_bias * mask  # shape [N]
+
+
+def compute_stop_reward(env, dist_threshold=0.2, vel_threshold=0.05, stop_penalty=-10.0):
+
+    x = env.scene["robot"].data.root_link_pos_w[:, :3]  # [N, 3]
+    target = env.command_manager.get_term("pose_command").pos_command_w[:, :3]  # [N, 3]
+    dist = torch.norm(x - target, dim=1)  # [N]
+    
+    vel = torch.norm(env.scene["robot"].data.root_com_lin_vel_w[:, :3], dim=1)  # [N]
+    
+    penalty = stop_penalty * ((dist < dist_threshold).float() * (vel > vel_threshold).float())
+    return penalty  # [N]
 
 def stand_still_joint_deviation_l1(
     env, command_name: str, command_threshold: float = 0.06, asset_cfg: SceneEntityCfg = SceneEntityCfg("robot")
