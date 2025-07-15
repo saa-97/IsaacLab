@@ -1,0 +1,32 @@
+--- git status ---
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/h1_navigation_cfg.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	logs/rsl_rl/h1_flat/2025-07-09_17-38-43/
+	logs/rsl_rl/h1_flat/2025-07-09_17-39-31/
+
+no changes added to commit (use "git add" and/or "git commit -a") 
+
+
+--- git diff ---
+diff --git a/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/h1_navigation_cfg.py b/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/h1_navigation_cfg.py
+index fecf4700..938fe252 100644
+--- a/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/h1_navigation_cfg.py
++++ b/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/h1_navigation_cfg.py
+@@ -119,7 +119,8 @@ class ActionsCfg:
+     # joint_pos = mdp.JointPositionActionCfg(asset_name="robot", joint_names=[".*"], scale=0.5, use_default_offset=True)
+     pre_trained_policy_action: mdp.PreTrainedPolicyActionCfg = mdp.PreTrainedPolicyActionCfg (
+         asset_name="robot",
+-        policy_path="/home/vc/IsaacLab/logs/rsl_rl/h1_flat/2025-07-09_16-47-24/exported/policy.pt",
++        # policy_path="/home/vc/IsaacLab/logs/rsl_rl/h1_flat/2025-07-09_16-47-24/exported/policy.pt",
++        policy_path=r"D:\Clean_install\IsaacLab\logs\rsl_rl\h1_flat\2025-07-09_16-47-24\exported\policy.pt",
+         low_level_decimation=4,
+         low_level_actions=LOW_LEVEL_ENV_CONFG.actions.joint_pos,
+         low_level_observations=LOW_LEVEL_ENV_CONFG.observations.policy,

@@ -54,7 +54,7 @@ _build
 .lastformat
 
 # RL-Games
-
+**/logs/**
 
 # Pre-Trained Checkpoints
 

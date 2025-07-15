@@ -119,7 +119,8 @@ class ActionsCfg:
     # joint_pos = mdp.JointPositionActionCfg(asset_name="robot", joint_names=[".*"], scale=0.5, use_default_offset=True)
     pre_trained_policy_action: mdp.PreTrainedPolicyActionCfg = mdp.PreTrainedPolicyActionCfg (
         asset_name="robot",
-        policy_path="/home/vc/IsaacLab/logs/rsl_rl/h1_flat/2025-07-09_16-47-24/exported/policy.pt",
+        # policy_path="/home/vc/IsaacLab/logs/rsl_rl/h1_flat/2025-07-09_16-47-24/exported/policy.pt",
+        policy_path=r"D:\Clean_install\IsaacLab\logs\rsl_rl\h1_flat\2025-07-09_17-39-31\exported\policy.pt",
         low_level_decimation=4,
         low_level_actions=LOW_LEVEL_ENV_CONFG.actions.joint_pos,
         low_level_observations=LOW_LEVEL_ENV_CONFG.observations.policy,
