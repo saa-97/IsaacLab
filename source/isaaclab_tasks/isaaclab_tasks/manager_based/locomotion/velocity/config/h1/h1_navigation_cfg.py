@@ -86,7 +86,7 @@ class CommandsCfg:
         resampling_time_range=(8, 8),
         rel_standing_envs=0.02,
         rel_heading_envs=1.0,
-        heading_command=False,
+        heading_command=True,
         heading_control_stiffness=0.5,
         debug_vis=False,
         ranges=mdp.UniformVelocityCommandCfg.Ranges(
@@ -98,7 +98,7 @@ class CommandsCfg:
     )
     pose_command = mdp.UniformPose2dCommandCfg(
         asset_name="robot",
-        simple_heading=False,
+        simple_heading=True,
         resampling_time_range=(8, 8),
         debug_vis=True,
         # Generate a tensor with [pos_x, pos_y, heading]
@@ -154,24 +154,18 @@ class ObservationsCfg:
         )
 
 #added code
-        # time_left = ObsTerm(
-        #     func=lambda env: (
-        #         env.command_manager.get_term("pose_command").time_left / 
-        #         env.command_manager.get_term("pose_command").cfg.resampling_time_range[1]
-        #     ).unsqueeze(-1),
-        #     scale=1.0,
-        #     clip=(0.0, 1.0)
-        # )
+        time_left = ObsTerm(
+            func=mdp.get_pose_command_time_left,
+            scale=1.0,
+            clip=(0.0, 1.0)
+        )
 
-        # target_position = ObsTerm(
-        #     func=lambda env: (
-        #         (env.command_manager.get_term("pose_command").pos_command_w[:, :2] - 
-        #         env.scene["robot"].data.root_link_pos_w[:, :2]).view(-1, 2)  # Ensure shape (num_envs, 2)
-        #     ),
-        #     noise=Unoise(n_min=-0.1, n_max=0.1),
-        #     scale=0.2,
-        #     clip=(-1.0, 1.0)
-        # )
+        target_position = ObsTerm(
+            func=mdp.get_target_position_relative,
+            noise=Unoise(n_min=-0.1, n_max=0.1),
+            scale=0.2,
+            clip=(-1.0, 1.0)
+        )
 
         def __post_init__(self):
             self.enable_corruption = True
@@ -285,8 +279,8 @@ class RewardsCfg:
         params={"sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*THIGH"), "threshold": 1.0},
     )
     # -- optional penalties
-    flat_orientation_l2 = RewTerm(func=mdp.flat_orientation_l2, weight=0.0)
-    dof_pos_limits = RewTerm(func=mdp.joint_pos_limits, weight=0.0)
+    flat_orientation_l2 = RewTerm(func=mdp.flat_orientation_l2, weight=-2.0)
+    dof_pos_limits = RewTerm(func=mdp.joint_pos_limits, weight=-2.0)
 
 
 @configclass
@@ -300,11 +294,11 @@ class TerminationsCfg:
     )
 
 
-@configclass
-class CurriculumCfg:
-    """Curriculum terms for the MDP."""
+# @configclass
+# class CurriculumCfg:
+#     """Curriculum terms for the MDP."""
 
-    terrain_levels = CurrTerm(func=mdp.terrain_levels_vel)
+#     terrain_levels = CurrTerm(func=mdp.terrain_levels_vel)
 
 
 ##

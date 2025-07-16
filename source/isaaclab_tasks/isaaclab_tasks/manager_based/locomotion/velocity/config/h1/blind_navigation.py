@@ -28,108 +28,29 @@ from isaaclab_assets import H1_MINIMAL_CFG  # isort: skip
 
 import math
 
-
-
-# @configclass
-# class ObservationsCfg:
-#     """Observation specifications for the MDP."""
-
-#     @configclass
-#     class PolicyCfg(ObsGroup):
-#         """Observations for policy group."""
-#         pose_command = ObsTerm(func=mdp.generated_commands, params={"command_name": "pose_command"})
-
-#         # observation terms (order preserved)
-#         base_lin_vel = ObsTerm(func=mdp.base_lin_vel, noise=Unoise(n_min=-0.1, n_max=0.1))
-#         base_ang_vel = ObsTerm(func=mdp.base_ang_vel, noise=Unoise(n_min=-0.2, n_max=0.2))
-#         projected_gravity = ObsTerm(
-#             func=mdp.projected_gravity,
-#             noise=Unoise(n_min=-0.05, n_max=0.05),
-#         )
-#         velocity_commands = ObsTerm(func=mdp.generated_commands, params={"command_name": "base_velocity"})
-#         joint_pos = ObsTerm(func=mdp.joint_pos_rel, noise=Unoise(n_min=-0.01, n_max=0.01))
-#         joint_vel = ObsTerm(func=mdp.joint_vel_rel, noise=Unoise(n_min=-1.5, n_max=1.5))
-#         actions = ObsTerm(func=mdp.last_action)
-#         height_scan = ObsTerm(
-#             func=mdp.height_scan,
-#             params={"sensor_cfg": SceneEntityCfg("height_scanner")},
-#             noise=Unoise(n_min=-0.1, n_max=0.1),
-#             clip=(-1.0, 1.0),
-#         )
-
-#added code
-        # time_left = ObsTerm(
-        #     func=lambda env: (
-        #         env.command_manager.get_term("pose_command").time_left / 
-        #         env.command_manager.get_term("pose_command").cfg.resampling_time_range[1]
-        #     ).unsqueeze(-1),
-        #     scale=1.0,
-        #     clip=(0.0, 1.0)
-        # )
-
-        # target_position = ObsTerm(
-        #     func=lambda env: (
-        #         (env.command_manager.get_term("pose_command").pos_command_w[:, :2] - 
-        #         env.scene["robot"].data.root_link_pos_w[:, :2]).view(-1, 2)  # Ensure shape (num_envs, 2)
-        #     ),
-        #     noise=Unoise(n_min=-0.1, n_max=0.1),
-        #     scale=0.2,
-        #     clip=(-1.0, 1.0)
-        # )
-
-    #     def __post_init__(self):
-    #         self.enable_corruption = True
-    #         self.concatenate_terms = True
-
-    # # observation groups
-    # policy: PolicyCfg = PolicyCfg()
-
-
-# @configclass
-# class CommandsCfg:
-#     """Command specifications for the MDP."""
-
-
-
-#     pose_command = mdp.UniformPose2dCommandCfg(
-#         asset_name="robot",
-#         simple_heading=False,
-#         resampling_time_range=(8, 8),
-#         debug_vis=True,
-#         # Generate a tensor with [pos_x, pos_y, heading]
-#         ranges=mdp.UniformPose2dCommandCfg.Ranges(
-#             pos_x=(-3.0, 3.0),
-#             pos_y=(-3.0, 3.0),
-#             heading=(-math.pi, math.pi)
-#         ),
-#     )
-
-
 @configclass
 class H1Rewards(RewardsCfg):
     """Reward terms for the MDP."""
 
     termination_penalty = RewTerm(func=mdp.is_terminated, weight=-400.0)
 
-
 #code not being used now
 
     position_tracking = RewTerm(
-        func=mdp.position_command_error_tanh,
-        weight=0.5,
-        params={"std": 4, "command_name": "pose_command", "asset_cfg": SceneEntityCfg("robot", body_names=".*torso_link")},
+        func=mdp.position_command_error_tanh_navigation,
+        weight=2,
+        params={"std": 4, "command_name": "pose_command"},
     )
     position_tracking_fine_grained = RewTerm(
-        func=mdp.position_command_error_tanh,
-        weight=0.5,
-        params={"std": 0.4, "command_name": "pose_command", "asset_cfg": SceneEntityCfg("robot", body_names=".*torso_link")},
+        func=mdp.position_command_error_tanh_navigation,
+        weight=2,
+        params={"std": 0.4, "command_name": "pose_command"},
     )
     orientation_tracking = RewTerm(
         func=mdp.heading_command_error_abs,
         weight=-0.2,
         params={"command_name": "pose_command"},
     )
-
 
 #navigation related code from blind_3 paper
 
@@ -144,7 +65,6 @@ class H1Rewards(RewardsCfg):
         weight=1.0,
         params={}
     )
-
 
     exploration_reward = RewTerm(
         func=mdp.compute_exploration_reward,
@@ -174,7 +94,7 @@ class H1Rewards(RewardsCfg):
     )
     feet_air_time = RewTerm(
         func=mdp.feet_air_time_positive_biped,
-        weight=0.00001,
+        weight=0.01,
         params={
             "command_name": "base_velocity",
             "sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*ankle_link"),
@@ -183,7 +103,7 @@ class H1Rewards(RewardsCfg):
     )
     feet_slide = RewTerm(
         func=mdp.feet_slide,
-        weight=-0.00001,
+        weight=-0.01,
         params={
             "sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*ankle_link"),
             "asset_cfg": SceneEntityCfg("robot", body_names=".*ankle_link"),
@@ -207,7 +127,6 @@ class H1Rewards(RewardsCfg):
     joint_deviation_torso = RewTerm(
         func=mdp.joint_deviation_l1, weight=-0.1, params={"asset_cfg": SceneEntityCfg("robot", joint_names="torso")}
     )
-
 
 @configclass
 class H1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):

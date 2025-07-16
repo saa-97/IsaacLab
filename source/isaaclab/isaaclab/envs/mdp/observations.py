@@ -613,3 +613,27 @@ def current_time_s(env: ManagerBasedRLEnv) -> torch.Tensor:
 def remaining_time_s(env: ManagerBasedRLEnv) -> torch.Tensor:
     """The maximum time remaining in the episode (in seconds)."""
     return env.max_episode_length_s - env.episode_length_buf.unsqueeze(1) * env.step_dt
+
+
+def get_pose_command_time_left(env):
+    """Get normalized time left for pose command."""
+    pose_cmd = env.command_manager.get_term("pose_command")
+    max_time = pose_cmd.cfg.resampling_time_range[1]
+    if max_time <= 0:
+        return torch.zeros((env.num_envs, 1), device=env.device)
+    
+    normalized_time = pose_cmd.time_left / max_time
+    return torch.clamp(normalized_time, 0.0, 1.0).unsqueeze(-1)
+
+
+def get_target_position_relative(env):
+    """Get relative target position in robot's local frame."""
+    pose_cmd = env.command_manager.get_term("pose_command")
+    robot_pos = env.scene["robot"].data.root_link_pos_w[:, :2]
+    target_pos = pose_cmd.pos_command_w[:, :2]
+    
+    # Calculate relative position (target - current)
+    relative_pos = target_pos - robot_pos
+    
+    # Ensure proper shape (num_envs, 2)
+    return relative_pos
