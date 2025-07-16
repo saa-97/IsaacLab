@@ -38,12 +38,12 @@ class H1Rewards(RewardsCfg):
 
     position_tracking = RewTerm(
         func=mdp.position_command_error_tanh_navigation,
-        weight=2,
+        weight=0.5,
         params={"std": 4, "command_name": "pose_command"},
     )
     position_tracking_fine_grained = RewTerm(
         func=mdp.position_command_error_tanh_navigation,
-        weight=2,
+        weight=0.5,
         params={"std": 0.4, "command_name": "pose_command"},
     )
     orientation_tracking = RewTerm(
@@ -51,6 +51,7 @@ class H1Rewards(RewardsCfg):
         weight=-0.2,
         params={"command_name": "pose_command"},
     )
+
 
 #navigation related code from blind_3 paper
 
@@ -83,7 +84,11 @@ class H1Rewards(RewardsCfg):
         }
     )
 
-    lin_vel_z_l2 = None
+    lin_vel_z_l2 = RewTerm(
+        func=mdp.lin_vel_z_l2,
+        weight=-2.0,
+)
+
     track_lin_vel_xy_exp = RewTerm(
         func=mdp.track_lin_vel_xy_yaw_frame_exp,
         weight=0.00001,
@@ -94,7 +99,7 @@ class H1Rewards(RewardsCfg):
     )
     feet_air_time = RewTerm(
         func=mdp.feet_air_time_positive_biped,
-        weight=0.01,
+        weight=0.00001,
         params={
             "command_name": "base_velocity",
             "sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*ankle_link"),
@@ -103,7 +108,7 @@ class H1Rewards(RewardsCfg):
     )
     feet_slide = RewTerm(
         func=mdp.feet_slide,
-        weight=-0.01,
+        weight=-0.00001,
         params={
             "sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*ankle_link"),
             "asset_cfg": SceneEntityCfg("robot", body_names=".*ankle_link"),
