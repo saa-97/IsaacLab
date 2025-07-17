@@ -1,0 +1,3235 @@
+--- git status ---
+On branch main
+Your branch is behind 'origin/main' by 2 commits, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   IsaacLab (new commits)
+	modified:   logs/rsl_rl/anymal_c_navigation/2025-07-07_17-30-16/exported/policy.pt
+	deleted:    logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/events.out.tfevents.1751969993.DESKTOP-S6CVN4S.23404.0
+	deleted:    logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/git/IsaacLab.diff
+	deleted:    logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/model_0.pt
+	deleted:    logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/params/agent.pkl
+	deleted:    logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/params/agent.yaml
+	deleted:    logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/params/env.pkl
+	deleted:    logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/params/env.yaml
+	deleted:    logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/events.out.tfevents.1752049960.DESKTOP-S6CVN4S.21436.0
+	deleted:    logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/git/IsaacLab.diff
+	deleted:    logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/model_0.pt
+	deleted:    logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/params/agent.pkl
+	deleted:    logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/params/agent.yaml
+	deleted:    logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/params/env.pkl
+	deleted:    logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/params/env.yaml
+	deleted:    logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/events.out.tfevents.1752055060.DESKTOP-S6CVN4S.18384.0
+	deleted:    logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/git/IsaacLab.diff
+	deleted:    logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/model_0.pt
+	deleted:    logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/params/agent.pkl
+	deleted:    logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/params/agent.yaml
+	deleted:    logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/params/env.pkl
+	deleted:    logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/params/env.yaml
+	modified:   source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/blind_navigation.py
+	modified:   source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/h1_navigation_cfg.py
+	modified:   source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/mdp/rewards.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	trained_policies/rsl_rl/h1_flat/2025-07-16_12-44-22(good walk and better orientation)/
+
+no changes added to commit (use "git add" and/or "git commit -a") 
+
+
+--- git diff ---
+diff --git a/IsaacLab b/IsaacLab
+index 171786a0..3675f02a 160000
+--- a/IsaacLab
++++ b/IsaacLab
+@@ -1 +1 @@
+-Subproject commit 171786a04115c1e0f92c5bebd3060bde6c4aec25
++Subproject commit 3675f02a775cbb2e99dae783eabad0500f8dedcf
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-07_17-30-16/exported/policy.pt b/logs/rsl_rl/anymal_c_navigation/2025-07-07_17-30-16/exported/policy.pt
+index 5851f90e..76ff8077 100644
+--- a/logs/rsl_rl/anymal_c_navigation/2025-07-07_17-30-16/exported/policy.pt
++++ b/logs/rsl_rl/anymal_c_navigation/2025-07-07_17-30-16/exported/policy.pt
+@@ -1,3 +1,3 @@
+ version https://git-lfs.github.com/spec/v1
+-oid sha256:ee2c04f07134edd0b7f2d43e4dfefae64dd666c1552ece362116e661e906c0d9
++oid sha256:42c246ac48d7b47ee55a81c11d4226f6d9fe9f933e551c7634b6fdc9f8cf4646
+ size 83776
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/events.out.tfevents.1751969993.DESKTOP-S6CVN4S.23404.0 b/logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/events.out.tfevents.1751969993.DESKTOP-S6CVN4S.23404.0
+deleted file mode 100644
+index 4e45d6de..00000000
+Binary files a/logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/events.out.tfevents.1751969993.DESKTOP-S6CVN4S.23404.0 and /dev/null differ
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/git/IsaacLab.diff b/logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/git/IsaacLab.diff
+deleted file mode 100644
+index cf04f284..00000000
+--- a/logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/git/IsaacLab.diff
++++ /dev/null
+@@ -1,496 +0,0 @@
+---- git status ---
+-On branch main
+-Your branch is up to date with 'origin/main'.
+-
+-Changes not staged for commit:
+-  (use "git add <file>..." to update what will be committed)
+-  (use "git restore <file>..." to discard changes in working directory)
+-	modified:   source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/__init__.py
+-	modified:   source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/blind_navigation.py
+-	modified:   source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/mdp/rewards.py
+-	modified:   source/isaaclab_tasks/isaaclab_tasks/manager_based/navigation/config/anymal_c/navigation_env_cfg.py
+-
+-no changes added to commit (use "git add" and/or "git commit -a") 
+-
+-
+---- git diff ---
+-diff --git a/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/__init__.py b/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/__init__.py
+-index dd4adfb1..d8313471 100644
+---- a/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/__init__.py
+-+++ b/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/__init__.py
+-@@ -57,3 +57,26 @@ gym.register(
+-         "skrl_cfg_entry_point": f"{agents.__name__}:skrl_flat_ppo_cfg.yaml",
+-     },
+- )
+-+
+-+gym.register(
+-+    id="Isaac-Navigation-H1-v0",
+-+    entry_point="isaaclab.envs:ManagerBasedRLEnv",
+-+    disable_env_checker=True,
+-+    kwargs={
+-+        "env_cfg_entry_point": f"{__name__}.blind_navigation:H1RoughEnvCfg",
+-+        "rsl_rl_cfg_entry_point": f"{agents.__name__}.rsl_rl_ppo_cfg:H1FlatPPORunnerCfg",
+-+        "skrl_cfg_entry_point": f"{agents.__name__}:skrl_flat_ppo_cfg.yaml",
+-+    },
+-+)
+-+
+-+
+-+gym.register(
+-+    id="Isaac-Navigation-H1-Play-v0",
+-+    entry_point="isaaclab.envs:ManagerBasedRLEnv",
+-+    disable_env_checker=True,
+-+    kwargs={
+-+        "env_cfg_entry_point": f"{__name__}.blind_navigation:H1RoughEnvCfg_PLAY",
+-+        "rsl_rl_cfg_entry_point": f"{agents.__name__}.rsl_rl_ppo_cfg:H1FlatPPORunnerCfg",
+-+        "skrl_cfg_entry_point": f"{agents.__name__}:skrl_flat_ppo_cfg.yaml",
+-+    },
+-+)
+-diff --git a/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/blind_navigation.py b/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/blind_navigation.py
+-index a0d6a79a..72f4bd82 100644
+---- a/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/blind_navigation.py
+-+++ b/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/blind_navigation.py
+-@@ -1,26 +1,107 @@
+- #Rough_env_cfg from Manager Based RL, Config H1.
+- 
+--from omni.isaac.lab.managers import RewardTermCfg as RewTerm
+--from omni.isaac.lab.managers import SceneEntityCfg
+--from omni.isaac.lab.utils import configclass
+--from omni.isaac.lab.managers import CurriculumTermCfg as CurrTerm
+-+from __future__ import annotations
+-+
+-+from isaaclab.managers import RewardTermCfg as RewTerm
+-+from isaaclab.managers import SceneEntityCfg
+-+from isaaclab.utils import configclass
+-+from isaaclab.managers import CurriculumTermCfg as CurrTerm
+- import torch
+--from omni.isaac.lab.managers import CommandTermCfg
+-+from isaaclab.managers import CommandTermCfg
+-+from isaaclab.managers import CurriculumTermCfg as CurrTerm
+-+from isaaclab.managers import EventTermCfg as EventTerm
+-+from isaaclab.managers import ObservationGroupCfg as ObsGroup
+-+from isaaclab.managers import ObservationTermCfg as ObsTerm
+-+from isaaclab.utils.noise import AdditiveUniformNoiseCfg as Unoise
+- # source/isaaclab_tasks/isaaclab_tasks/manager_based/manipulation/reach/mdp/rewards.py
+- 
+--import omni.isaac.lab_tasks.manager_based.navigation.mdp as mdp
+--import omni.isaac.lab_tasks.manager_based.locomotion.velocity.mdp as mdp
+--from omni.isaac.lab_tasks.manager_based.locomotion.velocity.velocity_env_cfg import LocomotionVelocityRoughEnvCfg, RewardsCfg
+-+import isaaclab_tasks.manager_based.navigation.mdp as mdpa
+-+import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
+-+from isaaclab_tasks.manager_based.locomotion.velocity.velocity_env_cfg import LocomotionVelocityRoughEnvCfg, RewardsCfg
+- # from omni.isaac.lab.managers import TimedataCfg
+- ##
+- # Pre-defined configs
+- ##
+--from omni.isaac.lab_assets import H1_MINIMAL_CFG  # isort: skip
+-+from isaaclab_assets import H1_MINIMAL_CFG  # isort: skip
+- 
+- import math
+- 
+- 
+- 
+-+@configclass
+-+class ObservationsCfg:
+-+    """Observation specifications for the MDP."""
+-+
+-+    @configclass
+-+    class PolicyCfg(ObsGroup):
+-+        """Observations for policy group."""
+-+        pose_command = ObsTerm(func=mdp.generated_commands, params={"command_name": "pose_command"})
+-+
+-+        # observation terms (order preserved)
+-+        base_lin_vel = ObsTerm(func=mdp.base_lin_vel, noise=Unoise(n_min=-0.1, n_max=0.1))
+-+        base_ang_vel = ObsTerm(func=mdp.base_ang_vel, noise=Unoise(n_min=-0.2, n_max=0.2))
+-+        projected_gravity = ObsTerm(
+-+            func=mdp.projected_gravity,
+-+            noise=Unoise(n_min=-0.05, n_max=0.05),
+-+        )
+-+        velocity_commands = ObsTerm(func=mdp.generated_commands, params={"command_name": "base_velocity"})
+-+        joint_pos = ObsTerm(func=mdp.joint_pos_rel, noise=Unoise(n_min=-0.01, n_max=0.01))
+-+        joint_vel = ObsTerm(func=mdp.joint_vel_rel, noise=Unoise(n_min=-1.5, n_max=1.5))
+-+        actions = ObsTerm(func=mdp.last_action)
+-+        height_scan = ObsTerm(
+-+            func=mdp.height_scan,
+-+            params={"sensor_cfg": SceneEntityCfg("height_scanner")},
+-+            noise=Unoise(n_min=-0.1, n_max=0.1),
+-+            clip=(-1.0, 1.0),
+-+        )
+-+
+-+#added code
+-+        time_left = ObsTerm(
+-+            func=lambda env: (
+-+                env.command_manager.get_term("pose_command").time_left / 
+-+                env.command_manager.get_term("pose_command").cfg.resampling_time_range[1]
+-+            ).unsqueeze(-1),
+-+            scale=1.0,
+-+            clip=(0.0, 1.0)
+-+        )
+-+
+-+        target_position = ObsTerm(
+-+            func=lambda env: (
+-+                (env.command_manager.get_term("pose_command").pos_command_w[:, :2] - 
+-+                env.scene["robot"].data.root_link_pos_w[:, :2]).view(-1, 2)  # Ensure shape (num_envs, 2)
+-+            ),
+-+            noise=Unoise(n_min=-0.1, n_max=0.1),
+-+            scale=0.2,
+-+            clip=(-1.0, 1.0)
+-+        )
+-+
+-+        def __post_init__(self):
+-+            self.enable_corruption = True
+-+            self.concatenate_terms = True
+-+
+-+    # observation groups
+-+    policy: PolicyCfg = PolicyCfg()
+-+
+-+
+-+@configclass
+-+class CommandsCfg:
+-+    """Command specifications for the MDP."""
+-+
+-+
+-+
+-+    pose_command = mdp.UniformPose2dCommandCfg(
+-+        asset_name="robot",
+-+        simple_heading=False,
+-+        resampling_time_range=(8, 8),
+-+        debug_vis=True,
+-+        # Generate a tensor with [pos_x, pos_y, heading]
+-+        ranges=mdp.UniformPose2dCommandCfg.Ranges(
+-+            pos_x=(-3.0, 3.0),
+-+            pos_y=(-3.0, 3.0),
+-+            heading=(-math.pi, math.pi)
+-+        ),
+-+    )
+-+
+- 
+- @configclass
+- class H1Rewards(RewardsCfg):
+-@@ -31,21 +112,21 @@ class H1Rewards(RewardsCfg):
+- 
+- #code not being used now
+- 
+--    position_tracking = RewTerm(
+--        func=mdp.position_command_error_tanh,
+--        weight=0.5,
+--        params={"std": 4, "command_name": "pose_command"},
+--    )
+--    position_tracking_fine_grained = RewTerm(
+--        func=mdp.position_command_error_tanh,
+--        weight=0.5,
+--        params={"std": 0.4, "command_name": "pose_command"},
+--    )
+--    orientation_tracking = RewTerm(
+--        func=mdp.heading_command_error_abs,
+--        weight=-0.2,
+--        params={"command_name": "pose_command"},
+--    )
+-+    # position_tracking = RewTerm(
+-+    #     func=mdpa.position_command_error_tanh,
+-+    #     weight=0.5,
+-+    #     params={"std": 4, "command_name": "pose_command"},
+-+    # )
+-+    # position_tracking_fine_grained = RewTerm(
+-+    #     func=mdpa.position_command_error_tanh,
+-+    #     weight=0.5,
+-+    #     params={"std": 0.4, "command_name": "pose_command"},
+-+    # )
+-+    # orientation_tracking = RewTerm(
+-+    #     func=mdpa.heading_command_error_abs,
+-+    #     weight=-0.2,
+-+    #     params={"command_name": "pose_command"},
+-+    # )
+- 
+- 
+- #navigation related code from blind_3 paper
+-@@ -215,27 +296,28 @@ class H1RoughEnvCfg_PLAY(H1RoughEnvCfg):
+- import math
+- import torch
+- from dataclasses import MISSING
+--from omni.isaac.lab.utils.math import quat_rotate_inverse
+--import omni.isaac.lab_tasks.manager_based.locomotion.velocity.mdp as mdp
+--import omni.isaac.lab.sim as sim_utils
+--from omni.isaac.lab.assets import ArticulationCfg, AssetBaseCfg
+--from omni.isaac.lab.envs import ManagerBasedRLEnvCfg
+--from omni.isaac.lab.managers import CurriculumTermCfg as CurrTerm
+--from omni.isaac.lab.managers import EventTermCfg as EventTerm
+--from omni.isaac.lab.managers import ObservationGroupCfg as ObsGroup
+--from omni.isaac.lab.managers import ObservationTermCfg as ObsTerm
+--from omni.isaac.lab.managers import RewardTermCfg as RewTerm
+--from omni.isaac.lab.managers import SceneEntityCfg
+--from omni.isaac.lab.managers import TerminationTermCfg as DoneTerm
+--from omni.isaac.lab.scene import InteractiveSceneCfg
+--from omni.isaac.lab.sensors import ContactSensorCfg, RayCasterCfg, patterns
+--from omni.isaac.lab.utils import configclass
+--from omni.isaac.lab.utils.assets import ISAAC_NUCLEUS_DIR, ISAACLAB_NUCLEUS_DIR
+--from omni.isaac.lab.utils.noise import AdditiveUniformNoiseCfg as Unoise
+-+from isaaclab.utils.math import quat_rotate_inverse
+-+import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
+-+import isaaclab.sim as sim_utils
+-+from isaaclab.assets import ArticulationCfg, AssetBaseCfg
+-+from isaaclab.envs import ManagerBasedRLEnvCfg
+-+from isaaclab.managers import CurriculumTermCfg as CurrTerm
+-+from isaaclab.managers import EventTermCfg as EventTerm
+-+from isaaclab.managers import ObservationGroupCfg as ObsGroup
+-+from isaaclab.managers import ObservationTermCfg as ObsTerm
+-+from isaaclab.managers import RewardTermCfg as RewTerm
+-+from isaaclab.managers import SceneEntityCfg
+-+from isaaclab.managers import TerminationTermCfg as DoneTerm
+-+from isaaclab.scene import InteractiveSceneCfg
+-+from isaaclab.sensors import ContactSensorCfg, RayCasterCfg, patterns
+-+from isaaclab.terrains import TerrainImporterCfg
+-+from isaaclab.utils import configclass
+-+from isaaclab.utils.assets import ISAAC_NUCLEUS_DIR, ISAACLAB_NUCLEUS_DIR
+-+from isaaclab.utils.noise import AdditiveUniformNoiseCfg as Unoise
+- # from omni.isaac.lab.terrains import TerrainImporterCfg  # Uncomment this line
+--import omni.isaac.lab_tasks.manager_based.locomotion.velocity.mdp as mdp
+--from omni.isaac.lab_assets import H1_MINIMAL_CFG
+--from omni.isaac.lab.assets import RigidObjectCfg  # Add this import
+-+import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
+-+from isaaclab_assets import H1_MINIMAL_CFG  # isort: skip
+-+from isaaclab.assets import RigidObjectCfg  # Add this import
+- 
+- # from omni.isaac.lab_tasks.manager_based.locomotion.velocity.mdp import UniformVelocityCommand
+- 
+-@@ -567,16 +649,14 @@ The functions can be passed to the :class:`omni.isaac.lab.managers.RewardTermCfg
+- specify the reward function and its parameters.
+- """
+- 
+--from __future__ import annotations
+- 
+--from __future__ import annotations
+- 
+- import torch
+- from typing import TYPE_CHECKING
+- 
+--from omni.isaac.lab.assets import RigidObject
+--from omni.isaac.lab.managers import SceneEntityCfg
+--from omni.isaac.lab.utils.math import combine_frame_transforms, quat_error_magnitude, quat_mul
+-+from isaaclab.assets import RigidObject
+-+from isaaclab.managers import SceneEntityCfg
+-+from isaaclab.utils.math import combine_frame_transforms, quat_error_magnitude, quat_mul
+- 
+- if TYPE_CHECKING:
+-     from isaaclab.envs import ManagerBasedRLEnv
+-@@ -586,17 +666,17 @@ import torch
+- from typing import TYPE_CHECKING
+- 
+- if TYPE_CHECKING:
+--    from omni.isaac.lab.envs import ManagerBasedRLEnv
+-+    from isaaclab.envs import ManagerBasedRLEnv
+- 
+- import torch
+- from typing import TYPE_CHECKING
+- 
+--from omni.isaac.lab.managers import SceneEntityCfg
+--from omni.isaac.lab.sensors import ContactSensor
+--from omni.isaac.lab.utils.math import quat_rotate_inverse, yaw_quat
+-+from isaaclab.managers import SceneEntityCfg
+-+from isaaclab.sensors import ContactSensor
+-+from isaaclab.utils.math import quat_rotate_inverse, yaw_quat
+- 
+- if TYPE_CHECKING:
+--    from omni.isaac.lab.envs import ManagerBasedRLEnv
+-+    from isaaclab.envs import ManagerBasedRLEnv
+- 
+- 
+- def feet_air_time(
+-diff --git a/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/mdp/rewards.py b/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/mdp/rewards.py
+-index 7a1fc12a..1e0786f6 100644
+---- a/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/mdp/rewards.py
+-+++ b/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/mdp/rewards.py
+-@@ -14,6 +14,11 @@ from __future__ import annotations
+- import torch
+- from typing import TYPE_CHECKING
+- 
+-+from isaaclab.assets import RigidObject
+-+from isaaclab.managers import SceneEntityCfg
+-+from isaaclab.utils.math import combine_frame_transforms, quat_error_magnitude, quat_mul
+-+
+-+
+- from isaaclab.envs import mdp
+- from isaaclab.managers import SceneEntityCfg
+- from isaaclab.sensors import ContactSensor
+-@@ -106,6 +111,136 @@ def track_ang_vel_z_world_exp(
+-     ang_vel_error = torch.square(env.command_manager.get_command(command_name)[:, 2] - asset.data.root_ang_vel_w[:, 2])
+-     return torch.exp(-ang_vel_error / std**2)
+- 
+-+def position_command_error_tanh(env: ManagerBasedRLEnv, std: float, command_name: str) -> torch.Tensor:
+-+    """Reward position tracking with tanh kernel."""
+-+    command = env.command_manager.get_command(command_name)
+-+    des_pos_b = command[:, :3]
+-+    distance = torch.norm(des_pos_b, dim=1)
+-+    return 1 - torch.tanh(distance / std)
+-+
+-+def heading_command_error_abs(env: ManagerBasedRLEnv, command_name: str) -> torch.Tensor:
+-+    """Penalize tracking orientation error."""
+-+    command = env.command_manager.get_command(command_name)
+-+    heading_b = command[:, 3]
+-+    return heading_b.abs()
+-+
+-+def position_command_error(env: ManagerBasedRLEnv, command_name: str, asset_cfg: SceneEntityCfg) -> torch.Tensor:
+-+    """Penalize tracking of the position error using L2-norm.
+-+
+-+    The function computes the position error between the desired position (from the command) and the
+-+    current position of the asset's body (in world frame). The position error is computed as the L2-norm
+-+    of the difference between the desired and current positions.
+-+    """
+-+    # extract the asset (to enable type hinting)
+-+    asset: RigidObject = env.scene[asset_cfg.name]
+-+    command = env.command_manager.get_command(command_name)
+-+    # obtain the desired and current positions
+-+    des_pos_b = command[:, :3]
+-+    des_pos_w, _ = combine_frame_transforms(asset.data.root_state_w[:, :3], asset.data.root_state_w[:, 3:7], des_pos_b)
+-+    curr_pos_w = asset.data.body_state_w[:, asset_cfg.body_ids[0], :3]  # type: ignore
+-+    return torch.norm(curr_pos_w - des_pos_w, dim=1)
+-+
+-+def position_command_error_tanh(
+-+    env: ManagerBasedRLEnv, std: float, command_name: str, asset_cfg: SceneEntityCfg
+-+) -> torch.Tensor:
+-+    """Reward tracking of the position using the tanh kernel.
+-+
+-+    The function computes the position error between the desired position (from the command) and the
+-+    current position of the asset's body (in world frame) and maps it with a tanh kernel.
+-+    """
+-+    # extract the asset (to enable type hinting)
+-+    asset: RigidObject = env.scene[asset_cfg.name]
+-+    command = env.command_manager.get_command(command_name)
+-+    # obtain the desired and current positions
+-+    des_pos_b = command[:, :3]
+-+    des_pos_w, _ = combine_frame_transforms(asset.data.root_state_w[:, :3], asset.data.root_state_w[:, 3:7], des_pos_b)
+-+    curr_pos_w = asset.data.body_state_w[:, asset_cfg.body_ids[0], :3]  # type: ignore
+-+    distance = torch.norm(curr_pos_w - des_pos_w, dim=1)
+-+    return 1 - torch.tanh(distance / std)
+-+
+-+def orientation_command_error(env: ManagerBasedRLEnv, command_name: str, asset_cfg: SceneEntityCfg) -> torch.Tensor:
+-+    """Penalize tracking orientation error using shortest path.
+-+
+-+    The function computes the orientation error between the desired orientation (from the command) and the
+-+    current orientation of the asset's body (in world frame). The orientation error is computed as the shortest
+-+    path between the desired and current orientations.
+-+    """
+-+    # extract the asset (to enable type hinting)
+-+    asset: RigidObject = env.scene[asset_cfg.name]
+-+    command = env.command_manager.get_command(command_name)
+-+    # obtain the desired and current orientations
+-+    des_quat_b = command[:, 3:7]
+-+    des_quat_w = quat_mul(asset.data.root_state_w[:, 3:7], des_quat_b)
+-+    curr_quat_w = asset.data.body_state_w[:, asset_cfg.body_ids[0], 3:7]  # type: ignore
+-+    return quat_error_magnitude(curr_quat_w, des_quat_w)
+-+
+-+def compute_terminal_reward(env, Tr=1.0):
+-+
+-+    time_left = env.command_manager.get_term("pose_command").time_left  # e.g., [N, M]
+-+    active = (time_left < Tr).float()  # still [N, M]
+-+    
+-+    xb = env.scene["robot"].data.root_link_pos_w[:, :3]  # [N, 3]
+-+    target = env.command_manager.get_term("pose_command").pos_command_w[:, :3]  # [N, 3] or [N, M, 3]
+-+    
+-+    if target.dim() == 2:
+-+        target = target.unsqueeze(1)  # becomes [N, 1, 3]
+-+    xb = xb.unsqueeze(1)  # becomes [N, 1, 3]
+-+    
+-+    dist2 = torch.sum((xb - target)**2, dim=-1)
+-+    
+-+    reward = active * (1.0 / Tr) * (1.0 / (1.0 + dist2))
+-+    return reward.mean(dim=1)
+-+
+-+def compute_stalling_penalty(env):
+-+    """
+-+    Computes a penalty for stalling far from the target, matching paper's r_stall.
+-+    """
+-+    v = torch.norm(env.scene["robot"].data.root_com_lin_vel_w[:, :3], dim=1, keepdim=True)
+-+    
+-+    xb = env.scene["robot"].data.root_link_pos_w[:, :3].unsqueeze(1)  # [N, 1, 3]
+-+    target = env.command_manager.get_term("pose_command").pos_command_w[:, :3]
+-+    if target.dim() == 2:
+-+        target = target.unsqueeze(1)  # [N, 1, 3]
+-+    dist = torch.norm(xb - target, dim=-1)
+-+    
+-+    condition = ((v < 0.1) & (dist > 0.5)).float()  # [N, 1]
+-+    penalty = -1.0 * condition
+-+    return penalty.mean(dim=1)
+-+
+-+
+-+
+-+def compute_exploration_reward(env, task_reward_tracker=0.0, is_terminal=False, remove_threshold=0.5):
+-+
+-+    v = env.scene["robot"].data.root_com_lin_vel_w[:, :3]    # shape [N, 3]
+-+    x = env.scene["robot"].data.root_link_pos_w[:, :3]       # shape [N, 3]
+-+    x_star = env.command_manager.get_term("pose_command").pos_command_w[:, :3]  # shape [N, 3]
+-+    
+-+    if x_star.dim() == 3:  
+-+        x_star = x_star.squeeze(1)  # now shape [N, 3]
+-+    
+-+    dot_prod = torch.sum(v * (x_star - x), dim=1)  # shape [N]
+-+    norm_v = torch.norm(v, dim=1) + 1e-6           # shape [N]
+-+    norm_diff = torch.norm(x_star - x, dim=1) + 1e-6  # shape [N]
+-+    r_bias = dot_prod / (norm_v * norm_diff)        # shape [N]
+-+    
+-+
+-+    if isinstance(task_reward_tracker, (int, float)):
+-+        task_reward_tracker = torch.tensor(task_reward_tracker, device=v.device, dtype=torch.float32).repeat(v.shape[0])
+-+    mask = (task_reward_tracker < remove_threshold).float()  # shape [N]
+-+    
+-+    return r_bias * mask  # shape [N]
+-+
+-+
+-+def compute_stop_reward(env, dist_threshold=0.2, vel_threshold=0.05, stop_penalty=-10.0):
+-+
+-+    x = env.scene["robot"].data.root_link_pos_w[:, :3]  # [N, 3]
+-+    target = env.command_manager.get_term("pose_command").pos_command_w[:, :3]  # [N, 3]
+-+    dist = torch.norm(x - target, dim=1)  # [N]
+-+    
+-+    vel = torch.norm(env.scene["robot"].data.root_com_lin_vel_w[:, :3], dim=1)  # [N]
+-+    
+-+    penalty = stop_penalty * ((dist < dist_threshold).float() * (vel > vel_threshold).float())
+-+    return penalty  # [N]
+- 
+- def stand_still_joint_deviation_l1(
+-     env, command_name: str, command_threshold: float = 0.06, asset_cfg: SceneEntityCfg = SceneEntityCfg("robot")
+-diff --git a/source/isaaclab_tasks/isaaclab_tasks/manager_based/navigation/config/anymal_c/navigation_env_cfg.py b/source/isaaclab_tasks/isaaclab_tasks/manager_based/navigation/config/anymal_c/navigation_env_cfg.py
+-index 2f2162fd..53860e87 100644
+---- a/source/isaaclab_tasks/isaaclab_tasks/manager_based/navigation/config/anymal_c/navigation_env_cfg.py
+-+++ b/source/isaaclab_tasks/isaaclab_tasks/manager_based/navigation/config/anymal_c/navigation_env_cfg.py
+-@@ -4,9 +4,11 @@
+- # SPDX-License-Identifier: BSD-3-Clause
+- 
+- import math
+--
+-+from isaaclab.assets import RigidObjectCfg
+-+from isaaclab.sim.schemas.schemas_cfg import RigidBodyPropertiesCfg
+- from isaaclab.envs import ManagerBasedRLEnvCfg
+- from isaaclab.managers import EventTermCfg as EventTerm
+-+from isaaclab.sim.spawners.from_files.from_files_cfg import UsdFileCfg
+- from isaaclab.managers import ObservationGroupCfg as ObsGroup
+- from isaaclab.managers import ObservationTermCfg as ObsTerm
+- from isaaclab.managers import RewardTermCfg as RewTerm
+-@@ -152,7 +154,27 @@ class NavigationEnvCfg_PLAY(NavigationEnvCfg):
+-     def __post_init__(self) -> None:
+-         # post init of parent
+-         super().__post_init__()
+--
+-+        # Rigid body properties of each cube
+-+        cube_properties = RigidBodyPropertiesCfg(
+-+            solver_position_iteration_count=16,
+-+            solver_velocity_iteration_count=1,
+-+            max_angular_velocity=1000.0,
+-+            max_linear_velocity=1000.0,
+-+            max_depenetration_velocity=5.0,
+-+            disable_gravity=False,
+-+        )
+-+
+-+        # Set each stacking cube deterministically
+-+        self.scene.cube_1 = RigidObjectCfg(
+-+            prim_path="{ENV_REGEX_NS}/Cube_1",
+-+            init_state=RigidObjectCfg.InitialStateCfg(pos=[0.4, 0.0, 0.0203], rot=[1, 0, 0, 0]),
+-+            spawn=UsdFileCfg(
+-+                usd_path=f"{ISAAC_NUCLEUS_DIR}/Props/Blocks/blue_block.usd",
+-+                scale=(1.0, 1.0, 1.0),
+-+                rigid_props=cube_properties,
+-+                semantic_tags=[("class", "cube_1")],
+-+            ),
+-+        )
+-         # make a smaller scene for play
+-         self.scene.num_envs = 50
+-         self.scene.env_spacing = 2.5
+\ No newline at end of file
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/model_0.pt b/logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/model_0.pt
+deleted file mode 100644
+index 5ddcf396..00000000
+--- a/logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/model_0.pt
++++ /dev/null
+@@ -1,3 +0,0 @@
+-version https://git-lfs.github.com/spec/v1
+-oid sha256:21064a6d39f8676a3ed1c0bf775030a2e5ad21da4868d4c8bd5e1ca599c0c6a5
+-size 451514
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/params/agent.pkl b/logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/params/agent.pkl
+deleted file mode 100644
+index b7a7d78b..00000000
+Binary files a/logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/params/agent.pkl and /dev/null differ
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/params/agent.yaml b/logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/params/agent.yaml
+deleted file mode 100644
+index be1ed6de..00000000
+--- a/logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/params/agent.yaml
++++ /dev/null
+@@ -1,43 +0,0 @@
+-seed: 42
+-device: cuda:0
+-num_steps_per_env: 8
+-max_iterations: 1500
+-empirical_normalization: false
+-policy:
+-  class_name: ActorCritic
+-  init_noise_std: 0.5
+-  noise_std_type: scalar
+-  actor_hidden_dims:
+-  - 128
+-  - 128
+-  critic_hidden_dims:
+-  - 128
+-  - 128
+-  activation: elu
+-algorithm:
+-  class_name: PPO
+-  num_learning_epochs: 5
+-  num_mini_batches: 4
+-  learning_rate: 0.001
+-  schedule: adaptive
+-  gamma: 0.99
+-  lam: 0.95
+-  entropy_coef: 0.005
+-  desired_kl: 0.01
+-  max_grad_norm: 1.0
+-  value_loss_coef: 1.0
+-  use_clipped_value_loss: true
+-  clip_param: 0.2
+-  normalize_advantage_per_mini_batch: false
+-  symmetry_cfg: null
+-  rnd_cfg: null
+-clip_actions: null
+-save_interval: 50
+-experiment_name: anymal_c_navigation
+-run_name: ''
+-logger: tensorboard
+-neptune_project: isaaclab
+-wandb_project: isaaclab
+-resume: false
+-load_run: .*
+-load_checkpoint: model_.*.pt
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/params/env.pkl b/logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/params/env.pkl
+deleted file mode 100644
+index 5ebd04d6..00000000
+Binary files a/logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/params/env.pkl and /dev/null differ
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/params/env.yaml b/logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/params/env.yaml
+deleted file mode 100644
+index 2474f485..00000000
+--- a/logs/rsl_rl/anymal_c_navigation/2025-07-08_12-19-42/params/env.yaml
++++ /dev/null
+@@ -1,608 +0,0 @@
+-viewer:
+-  eye: !!python/tuple
+-  - 7.5
+-  - 7.5
+-  - 7.5
+-  lookat: !!python/tuple
+-  - 0.0
+-  - 0.0
+-  - 0.0
+-  cam_prim_path: /OmniverseKit_Persp
+-  resolution: !!python/tuple
+-  - 1280
+-  - 720
+-  origin_type: world
+-  env_index: 0
+-  asset_name: null
+-  body_name: null
+-sim:
+-  physics_prim_path: /physicsScene
+-  device: cuda:0
+-  dt: 0.005
+-  render_interval: 4
+-  gravity: !!python/tuple
+-  - 0.0
+-  - 0.0
+-  - -9.81
+-  enable_scene_query_support: true
+-  use_fabric: true
+-  physx:
+-    solver_type: 1
+-    min_position_iteration_count: 1
+-    max_position_iteration_count: 255
+-    min_velocity_iteration_count: 0
+-    max_velocity_iteration_count: 255
+-    enable_ccd: false
+-    enable_stabilization: true
+-    enable_enhanced_determinism: false
+-    bounce_threshold_velocity: 0.5
+-    friction_offset_threshold: 0.04
+-    friction_correlation_distance: 0.025
+-    gpu_max_rigid_contact_count: 8388608
+-    gpu_max_rigid_patch_count: 163840
+-    gpu_found_lost_pairs_capacity: 2097152
+-    gpu_found_lost_aggregate_pairs_capacity: 33554432
+-    gpu_total_aggregate_pairs_capacity: 2097152
+-    gpu_collision_stack_size: 67108864
+-    gpu_heap_capacity: 67108864
+-    gpu_temp_buffer_capacity: 16777216
+-    gpu_max_num_partitions: 8
+-    gpu_max_soft_body_contacts: 1048576
+-    gpu_max_particle_contacts: 1048576
+-  physics_material:
+-    func: isaaclab.sim.spawners.materials.physics_materials:spawn_rigid_body_material
+-    static_friction: 0.5
+-    dynamic_friction: 0.5
+-    restitution: 0.0
+-    improve_patch_friction: true
+-    friction_combine_mode: average
+-    restitution_combine_mode: average
+-    compliant_contact_stiffness: 0.0
+-    compliant_contact_damping: 0.0
+-  render:
+-    enable_translucency: null
+-    enable_reflections: null
+-    enable_global_illumination: null
+-    antialiasing_mode: null
+-    enable_dlssg: null
+-    enable_dl_denoiser: null
+-    dlss_mode: null
+-    enable_direct_lighting: null
+-    samples_per_pixel: null
+-    enable_shadows: null
+-    enable_ambient_occlusion: null
+-    carb_settings: null
+-    rendering_mode: null
+-ui_window_class_type: isaaclab.envs.ui.manager_based_rl_env_window:ManagerBasedRLEnvWindow
+-seed: 42
+-decimation: 40
+-scene:
+-  num_envs: 3
+-  env_spacing: 2.5
+-  lazy_sensor_update: true
+-  replicate_physics: true
+-  filter_collisions: true
+-  robot:
+-    class_type: isaaclab.assets.articulation.articulation:Articulation
+-    prim_path: /World/envs/env_.*/Robot
+-    spawn:
+-      func: isaaclab.sim.spawners.from_files.from_files:spawn_from_usd
+-      visible: true
+-      semantic_tags: null
+-      copy_from_source: true
+-      mass_props: null
+-      deformable_props: null
+-      rigid_props:
+-        rigid_body_enabled: null
+-        kinematic_enabled: null
+-        disable_gravity: false
+-        linear_damping: 0.0
+-        angular_damping: 0.0
+-        max_linear_velocity: 1000.0
+-        max_angular_velocity: 1000.0
+-        max_depenetration_velocity: 1.0
+-        max_contact_impulse: null
+-        enable_gyroscopic_forces: null
+-        retain_accelerations: false
+-        solver_position_iteration_count: null
+-        solver_velocity_iteration_count: null
+-        sleep_threshold: null
+-        stabilization_threshold: null
+-      collision_props: null
+-      activate_contact_sensors: true
+-      scale: null
+-      articulation_props:
+-        articulation_enabled: null
+-        enabled_self_collisions: true
+-        solver_position_iteration_count: 4
+-        solver_velocity_iteration_count: 0
+-        sleep_threshold: null
+-        stabilization_threshold: null
+-        fix_root_link: null
+-      fixed_tendons_props: null
+-      joint_drive_props: null
+-      visual_material_path: material
+-      visual_material: null
+-      usd_path: http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/IsaacLab/Robots/ANYbotics/ANYmal-C/anymal_c.usd
+-      variants: null
+-    init_state:
+-      pos: !!python/tuple
+-      - 0.0
+-      - 0.0
+-      - 0.6
+-      rot: !!python/tuple
+-      - 1.0
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-      lin_vel: !!python/tuple
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-      ang_vel: !!python/tuple
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-      joint_pos:
+-        .*HAA: 0.0
+-        .*F_HFE: 0.4
+-        .*H_HFE: -0.4
+-        .*F_KFE: -0.8
+-        .*H_KFE: 0.8
+-      joint_vel:
+-        .*: 0.0
+-    collision_group: 0
+-    debug_vis: false
+-    articulation_root_prim_path: null
+-    soft_joint_pos_limit_factor: 0.95
+-    actuators:
+-      legs:
+-        class_type: isaaclab.actuators.actuator_net:ActuatorNetLSTM
+-        joint_names_expr:
+-        - .*HAA
+-        - .*HFE
+-        - .*KFE
+-        effort_limit: 80.0
+-        velocity_limit: 7.5
+-        effort_limit_sim: null
+-        velocity_limit_sim: null
+-        stiffness: null
+-        damping: null
+-        armature: null
+-        friction: null
+-        saturation_effort: 120.0
+-        network_file: http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/IsaacLab/ActuatorNets/ANYbotics/anydrive_3_lstm_jit.pt
+-  terrain:
+-    class_type: isaaclab.terrains.terrain_importer:TerrainImporter
+-    collision_group: -1
+-    prim_path: /World/ground
+-    num_envs: 3
+-    terrain_type: plane
+-    terrain_generator: null
+-    usd_path: null
+-    env_spacing: 2.5
+-    visual_material:
+-      func: isaaclab.sim.spawners.materials.visual_materials:spawn_from_mdl_file
+-      mdl_path: http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/IsaacLab/Materials/TilesMarbleSpiderWhiteBrickBondHoned/TilesMarbleSpiderWhiteBrickBondHoned.mdl
+-      project_uvw: true
+-      albedo_brightness: null
+-      texture_scale: !!python/tuple
+-      - 0.25
+-      - 0.25
+-    physics_material:
+-      func: isaaclab.sim.spawners.materials.physics_materials:spawn_rigid_body_material
+-      static_friction: 1.0
+-      dynamic_friction: 1.0
+-      restitution: 0.0
+-      improve_patch_friction: true
+-      friction_combine_mode: multiply
+-      restitution_combine_mode: multiply
+-      compliant_contact_stiffness: 0.0
+-      compliant_contact_damping: 0.0
+-    max_init_terrain_level: 5
+-    debug_vis: false
+-  height_scanner: null
+-  contact_forces:
+-    class_type: isaaclab.sensors.contact_sensor.contact_sensor:ContactSensor
+-    prim_path: /World/envs/env_.*/Robot/.*
+-    update_period: 0.005
+-    history_length: 3
+-    debug_vis: false
+-    track_pose: false
+-    track_air_time: true
+-    force_threshold: 1.0
+-    filter_prim_paths_expr: []
+-    visualizer_cfg:
+-      prim_path: /Visuals/ContactSensor
+-      markers:
+-        contact:
+-          func: isaaclab.sim.spawners.shapes.shapes:spawn_sphere
+-          visible: true
+-          semantic_tags: null
+-          copy_from_source: true
+-          mass_props: null
+-          rigid_props: null
+-          collision_props: null
+-          activate_contact_sensors: false
+-          visual_material_path: material
+-          visual_material:
+-            func: isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface
+-            diffuse_color: !!python/tuple
+-            - 1.0
+-            - 0.0
+-            - 0.0
+-            emissive_color: !!python/tuple
+-            - 0.0
+-            - 0.0
+-            - 0.0
+-            roughness: 0.5
+-            metallic: 0.0
+-            opacity: 1.0
+-          physics_material_path: material
+-          physics_material: null
+-          radius: 0.02
+-        no_contact:
+-          func: isaaclab.sim.spawners.shapes.shapes:spawn_sphere
+-          visible: false
+-          semantic_tags: null
+-          copy_from_source: true
+-          mass_props: null
+-          rigid_props: null
+-          collision_props: null
+-          activate_contact_sensors: false
+-          visual_material_path: material
+-          visual_material:
+-            func: isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface
+-            diffuse_color: !!python/tuple
+-            - 0.0
+-            - 1.0
+-            - 0.0
+-            emissive_color: !!python/tuple
+-            - 0.0
+-            - 0.0
+-            - 0.0
+-            roughness: 0.5
+-            metallic: 0.0
+-            opacity: 1.0
+-          physics_material_path: material
+-          physics_material: null
+-          radius: 0.02
+-  sky_light:
+-    class_type: null
+-    prim_path: /World/skyLight
+-    spawn:
+-      func: isaaclab.sim.spawners.lights.lights:spawn_light
+-      visible: true
+-      semantic_tags: null
+-      copy_from_source: true
+-      prim_type: DomeLight
+-      color: !!python/tuple
+-      - 1.0
+-      - 1.0
+-      - 1.0
+-      enable_color_temperature: false
+-      color_temperature: 6500.0
+-      normalize: false
+-      exposure: 0.0
+-      intensity: 750.0
+-      texture_file: http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/Materials/Textures/Skies/PolyHaven/kloofendal_43d_clear_puresky_4k.hdr
+-      texture_format: automatic
+-      visible_in_primary_ray: true
+-    init_state:
+-      pos: !!python/tuple
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-      rot: !!python/tuple
+-      - 1.0
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-    collision_group: 0
+-    debug_vis: false
+-recorders:
+-  dataset_file_handler_class_type: isaaclab.utils.datasets.hdf5_dataset_file_handler:HDF5DatasetFileHandler
+-  dataset_export_dir_path: /tmp/isaaclab/logs
+-  dataset_filename: dataset
+-  dataset_export_mode:
+-    _value_: 1
+-    _name_: EXPORT_ALL
+-  export_in_record_pre_reset: true
+-observations:
+-  policy:
+-    concatenate_terms: true
+-    concatenate_dim: -1
+-    enable_corruption: false
+-    history_length: null
+-    flatten_history_dim: true
+-    base_lin_vel:
+-      func: isaaclab.envs.mdp.observations:base_lin_vel
+-      params: {}
+-      modifiers: null
+-      noise: null
+-      clip: null
+-      scale: null
+-      history_length: 0
+-      flatten_history_dim: true
+-    projected_gravity:
+-      func: isaaclab.envs.mdp.observations:projected_gravity
+-      params: {}
+-      modifiers: null
+-      noise: null
+-      clip: null
+-      scale: null
+-      history_length: 0
+-      flatten_history_dim: true
+-    pose_command:
+-      func: isaaclab.envs.mdp.observations:generated_commands
+-      params:
+-        command_name: pose_command
+-      modifiers: null
+-      noise: null
+-      clip: null
+-      scale: null
+-      history_length: 0
+-      flatten_history_dim: true
+-actions:
+-  pre_trained_policy_action:
+-    class_type: isaaclab_tasks.manager_based.navigation.mdp.pre_trained_policy_action:PreTrainedPolicyAction
+-    asset_name: robot
+-    debug_vis: true
+-    clip: null
+-    policy_path: http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/IsaacLab/Policies/ANYmal-C/Blind/policy.pt
+-    low_level_decimation: 4
+-    low_level_actions:
+-      class_type: isaaclab.envs.mdp.actions.joint_actions:JointPositionAction
+-      asset_name: robot
+-      debug_vis: false
+-      clip: null
+-      joint_names:
+-      - .*
+-      scale: 0.5
+-      offset: 0.0
+-      preserve_order: false
+-      use_default_offset: true
+-    low_level_observations:
+-      concatenate_terms: true
+-      concatenate_dim: -1
+-      enable_corruption: true
+-      history_length: null
+-      flatten_history_dim: true
+-      base_lin_vel:
+-        func: isaaclab.envs.mdp.observations:base_lin_vel
+-        params: {}
+-        modifiers: null
+-        noise:
+-          func: isaaclab.utils.noise.noise_model:uniform_noise
+-          operation: add
+-          n_min: -0.1
+-          n_max: 0.1
+-        clip: null
+-        scale: null
+-        history_length: 0
+-        flatten_history_dim: true
+-      base_ang_vel:
+-        func: isaaclab.envs.mdp.observations:base_ang_vel
+-        params: {}
+-        modifiers: null
+-        noise:
+-          func: isaaclab.utils.noise.noise_model:uniform_noise
+-          operation: add
+-          n_min: -0.2
+-          n_max: 0.2
+-        clip: null
+-        scale: null
+-        history_length: 0
+-        flatten_history_dim: true
+-      projected_gravity:
+-        func: isaaclab.envs.mdp.observations:projected_gravity
+-        params: {}
+-        modifiers: null
+-        noise:
+-          func: isaaclab.utils.noise.noise_model:uniform_noise
+-          operation: add
+-          n_min: -0.05
+-          n_max: 0.05
+-        clip: null
+-        scale: null
+-        history_length: 0
+-        flatten_history_dim: true
+-      velocity_commands:
+-        func: isaaclab.envs.mdp.observations:generated_commands
+-        params:
+-          command_name: base_velocity
+-        modifiers: null
+-        noise: null
+-        clip: null
+-        scale: null
+-        history_length: 0
+-        flatten_history_dim: true
+-      joint_pos:
+-        func: isaaclab.envs.mdp.observations:joint_pos_rel
+-        params: {}
+-        modifiers: null
+-        noise:
+-          func: isaaclab.utils.noise.noise_model:uniform_noise
+-          operation: add
+-          n_min: -0.01
+-          n_max: 0.01
+-        clip: null
+-        scale: null
+-        history_length: 0
+-        flatten_history_dim: true
+-      joint_vel:
+-        func: isaaclab.envs.mdp.observations:joint_vel_rel
+-        params: {}
+-        modifiers: null
+-        noise:
+-          func: isaaclab.utils.noise.noise_model:uniform_noise
+-          operation: add
+-          n_min: -1.5
+-          n_max: 1.5
+-        clip: null
+-        scale: null
+-        history_length: 0
+-        flatten_history_dim: true
+-      actions:
+-        func: isaaclab.envs.mdp.observations:last_action
+-        params: {}
+-        modifiers: null
+-        noise: null
+-        clip: null
+-        scale: null
+-        history_length: 0
+-        flatten_history_dim: true
+-      height_scan: null
+-events:
+-  reset_base:
+-    func: isaaclab.envs.mdp.events:reset_root_state_uniform
+-    params:
+-      pose_range:
+-        x: !!python/tuple
+-        - -0.5
+-        - 0.5
+-        y: !!python/tuple
+-        - -0.5
+-        - 0.5
+-        yaw: !!python/tuple
+-        - -3.14
+-        - 3.14
+-      velocity_range:
+-        x: !!python/tuple
+-        - -0.0
+-        - 0.0
+-        y: !!python/tuple
+-        - -0.0
+-        - 0.0
+-        z: !!python/tuple
+-        - -0.0
+-        - 0.0
+-        roll: !!python/tuple
+-        - -0.0
+-        - 0.0
+-        pitch: !!python/tuple
+-        - -0.0
+-        - 0.0
+-        yaw: !!python/tuple
+-        - -0.0
+-        - 0.0
+-    mode: reset
+-    interval_range_s: null
+-    is_global_time: false
+-    min_step_count_between_reset: 0
+-rerender_on_reset: false
+-wait_for_textures: true
+-xr: null
+-is_finite_horizon: false
+-episode_length_s: 8.0
+-rewards:
+-  termination_penalty:
+-    func: isaaclab.envs.mdp.rewards:is_terminated
+-    params: {}
+-    weight: -400.0
+-  position_tracking:
+-    func: isaaclab_tasks.manager_based.navigation.mdp.rewards:position_command_error_tanh
+-    params:
+-      std: 2.0
+-      command_name: pose_command
+-    weight: 0.5
+-  position_tracking_fine_grained:
+-    func: isaaclab_tasks.manager_based.navigation.mdp.rewards:position_command_error_tanh
+-    params:
+-      std: 0.2
+-      command_name: pose_command
+-    weight: 0.5
+-  orientation_tracking:
+-    func: isaaclab_tasks.manager_based.navigation.mdp.rewards:heading_command_error_abs
+-    params:
+-      command_name: pose_command
+-    weight: -0.2
+-terminations:
+-  time_out:
+-    func: isaaclab.envs.mdp.terminations:time_out
+-    params: {}
+-    time_out: true
+-  base_contact:
+-    func: isaaclab.envs.mdp.terminations:illegal_contact
+-    params:
+-      sensor_cfg:
+-        name: contact_forces
+-        joint_names: null
+-        joint_ids: !!python/object/apply:builtins.slice
+-        - null
+-        - null
+-        - null
+-        fixed_tendon_names: null
+-        fixed_tendon_ids: !!python/object/apply:builtins.slice
+-        - null
+-        - null
+-        - null
+-        body_names: base
+-        body_ids: !!python/object/apply:builtins.slice
+-        - null
+-        - null
+-        - null
+-        object_collection_names: null
+-        object_collection_ids: !!python/object/apply:builtins.slice
+-        - null
+-        - null
+-        - null
+-        preserve_order: false
+-      threshold: 1.0
+-    time_out: false
+-curriculum: null
+-commands:
+-  pose_command:
+-    class_type: isaaclab.envs.mdp.commands.pose_2d_command:UniformPose2dCommand
+-    resampling_time_range: !!python/tuple
+-    - 8.0
+-    - 8.0
+-    debug_vis: true
+-    asset_name: robot
+-    simple_heading: false
+-    ranges:
+-      pos_x: !!python/tuple
+-      - -3.0
+-      - 3.0
+-      pos_y: !!python/tuple
+-      - -3.0
+-      - 3.0
+-      heading: !!python/tuple
+-      - -3.141592653589793
+-      - 3.141592653589793
+-    goal_pose_visualizer_cfg:
+-      prim_path: /Visuals/Command/pose_goal
+-      markers:
+-        arrow:
+-          func: isaaclab.sim.spawners.from_files.from_files:spawn_from_usd
+-          visible: true
+-          semantic_tags: null
+-          copy_from_source: true
+-          mass_props: null
+-          deformable_props: null
+-          rigid_props: null
+-          collision_props: null
+-          activate_contact_sensors: false
+-          scale: !!python/tuple
+-          - 0.2
+-          - 0.2
+-          - 0.8
+-          articulation_props: null
+-          fixed_tendons_props: null
+-          joint_drive_props: null
+-          visual_material_path: material
+-          visual_material:
+-            func: isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface
+-            diffuse_color: !!python/tuple
+-            - 0.0
+-            - 1.0
+-            - 0.0
+-            emissive_color: !!python/tuple
+-            - 0.0
+-            - 0.0
+-            - 0.0
+-            roughness: 0.5
+-            metallic: 0.0
+-            opacity: 1.0
+-          usd_path: http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/Props/UIElements/arrow_x.usd
+-          variants: null
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/events.out.tfevents.1752049960.DESKTOP-S6CVN4S.21436.0 b/logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/events.out.tfevents.1752049960.DESKTOP-S6CVN4S.21436.0
+deleted file mode 100644
+index e824a300..00000000
+Binary files a/logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/events.out.tfevents.1752049960.DESKTOP-S6CVN4S.21436.0 and /dev/null differ
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/git/IsaacLab.diff b/logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/git/IsaacLab.diff
+deleted file mode 100644
+index 72bcc28d..00000000
+--- a/logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/git/IsaacLab.diff
++++ /dev/null
+@@ -1,116 +0,0 @@
+---- git status ---
+-On branch main
+-Your branch is up to date with 'origin/main'.
+-
+-Changes not staged for commit:
+-  (use "git add <file>..." to update what will be committed)
+-  (use "git restore <file>..." to discard changes in working directory)
+-	modified:   source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/velocity_env_cfg.py
+-	modified:   source/isaaclab_tasks/isaaclab_tasks/manager_based/navigation/config/anymal_c/navigation_env_cfg.py
+-
+-no changes added to commit (use "git add" and/or "git commit -a") 
+-
+-
+---- git diff ---
+-diff --git a/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/velocity_env_cfg.py b/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/velocity_env_cfg.py
+-index 5c92b28e..0940b035 100644
+---- a/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/velocity_env_cfg.py
+-+++ b/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/velocity_env_cfg.py
+-@@ -66,6 +66,18 @@ class MySceneCfg(InteractiveSceneCfg):
+-     )
+-     # robots
+-     robot: ArticulationCfg = MISSING
+-+    
+-+    cube = RigidObjectCfg(
+-+        prim_path="{ENV_REGEX_NS}/Cube",
+-+        spawn=UsdFileCfg(
+-+            usd_path=f"{ISAAC_NUCLEUS_DIR}/Props/Blocks/blue_block.usd",
+-+            scale=(3, 3, 3),
+-+            rigid_props= RigidBodyPropertiesCfg(
+-+                kinematic_enabled=False
+-+            )
+-+        )
+-+    )
+-+
+-     # sensors
+-     height_scanner = RayCasterCfg(
+-         prim_path="{ENV_REGEX_NS}/Robot/base",
+-@@ -85,26 +97,6 @@ class MySceneCfg(InteractiveSceneCfg):
+-         ),
+-     )
+- 
+--    cube_properties = RigidBodyPropertiesCfg(
+--            solver_position_iteration_count=16,
+--            solver_velocity_iteration_count=1,
+--            max_angular_velocity=1000.0,
+--            max_linear_velocity=1000.0,
+--            max_depenetration_velocity=5.0,
+--            disable_gravity=False,
+--        )
+--
+--    cube_1 = RigidObjectCfg(
+--            prim_path="{ENV_REGEX_NS}/Cube_1",
+--            init_state=RigidObjectCfg.InitialStateCfg(pos=[0.4, 0.0, 0.0203], rot=[1, 0, 0, 0]),
+--            spawn=UsdFileCfg(
+--                usd_path=f"{ISAAC_NUCLEUS_DIR}/Props/Blocks/blue_block.usd",
+--                scale=(1.0, 1.0, 1.0),
+--                rigid_props=sim_utils.RigidBodyPropertiesCfg(),
+--                semantic_tags=[("class", "cube_1")],
+--            ),
+--        )
+--
+- 
+- ##
+- # MDP settings
+-diff --git a/source/isaaclab_tasks/isaaclab_tasks/manager_based/navigation/config/anymal_c/navigation_env_cfg.py b/source/isaaclab_tasks/isaaclab_tasks/manager_based/navigation/config/anymal_c/navigation_env_cfg.py
+-index 15c3ca53..b257bc19 100644
+---- a/source/isaaclab_tasks/isaaclab_tasks/manager_based/navigation/config/anymal_c/navigation_env_cfg.py
+-+++ b/source/isaaclab_tasks/isaaclab_tasks/manager_based/navigation/config/anymal_c/navigation_env_cfg.py
+-@@ -15,8 +15,9 @@ from isaaclab.managers import RewardTermCfg as RewTerm
+- from isaaclab.managers import SceneEntityCfg
+- from isaaclab.managers import TerminationTermCfg as DoneTerm
+- from isaaclab.utils import configclass
+--from isaaclab.utils.assets import ISAACLAB_NUCLEUS_DIR
+-+from isaaclab.utils.assets import ISAAC_NUCLEUS_DIR, ISAACLAB_NUCLEUS_DIR
+- from isaaclab_tasks.manager_based.manipulation.stack.mdp import franka_stack_events
+-+import isaaclab.sim as sim_utils
+- 
+- import isaaclab_tasks.manager_based.navigation.mdp as mdp
+- from isaaclab_tasks.manager_based.locomotion.velocity.config.anymal_c.flat_env_cfg import AnymalCFlatEnvCfg
+-@@ -33,7 +34,7 @@ class EventCfg:
+-         params={
+-             "pose_range": {"x": (0.4, 0.6), "y": (-0.10, 0.10), "z": (0.0203, 0.0203), "yaw": (-1.0, 1, 0)},
+-             "min_separation": 0.1,
+--            "asset_cfgs": [SceneEntityCfg("cube_1")],
+-+            "asset_cfgs": [SceneEntityCfg("cube")],
+-         },
+-     )
+-     reset_base = EventTerm(
+-@@ -163,27 +164,6 @@ class NavigationEnvCfg_PLAY(NavigationEnvCfg):
+-     def __post_init__(self) -> None:
+-         # post init of parent
+-         super().__post_init__()
+--        # # Rigid body properties of each cube
+--        # cube_properties = RigidBodyPropertiesCfg(
+--        #     solver_position_iteration_count=16,
+--        #     solver_velocity_iteration_count=1,
+--        #     max_angular_velocity=1000.0,
+--        #     max_linear_velocity=1000.0,
+--        #     max_depenetration_velocity=5.0,
+--        #     disable_gravity=False,
+--        # )
+--
+--        # # Set each stacking cube deterministically
+--        # self.scene.cube_1 = RigidObjectCfg(
+--        #     prim_path="{ENV_REGEX_NS}/Cube_1",
+--        #     init_state=RigidObjectCfg.InitialStateCfg(pos=[0.4, 0.0, 0.0203], rot=[1, 0, 0, 0]),
+--        #     spawn=UsdFileCfg(
+--        #         usd_path=f"{ISAAC_NUCLEUS_DIR}/Props/Blocks/blue_block.usd",
+--        #         scale=(1.0, 1.0, 1.0),
+--        #         rigid_props=cube_properties,
+--        #         semantic_tags=[("class", "cube_1")],
+--        #     ),
+--        # )
+-         # make a smaller scene for play
+-         self.scene.num_envs = 50
+-         self.scene.env_spacing = 2.5
+\ No newline at end of file
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/model_0.pt b/logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/model_0.pt
+deleted file mode 100644
+index c7d115cb..00000000
+--- a/logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/model_0.pt
++++ /dev/null
+@@ -1,3 +0,0 @@
+-version https://git-lfs.github.com/spec/v1
+-oid sha256:9aa8b91c18479f0286d97ee752d165513800df0ee72cb1f5c9d4e802fb6c559f
+-size 451514
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/params/agent.pkl b/logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/params/agent.pkl
+deleted file mode 100644
+index b7a7d78b..00000000
+Binary files a/logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/params/agent.pkl and /dev/null differ
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/params/agent.yaml b/logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/params/agent.yaml
+deleted file mode 100644
+index be1ed6de..00000000
+--- a/logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/params/agent.yaml
++++ /dev/null
+@@ -1,43 +0,0 @@
+-seed: 42
+-device: cuda:0
+-num_steps_per_env: 8
+-max_iterations: 1500
+-empirical_normalization: false
+-policy:
+-  class_name: ActorCritic
+-  init_noise_std: 0.5
+-  noise_std_type: scalar
+-  actor_hidden_dims:
+-  - 128
+-  - 128
+-  critic_hidden_dims:
+-  - 128
+-  - 128
+-  activation: elu
+-algorithm:
+-  class_name: PPO
+-  num_learning_epochs: 5
+-  num_mini_batches: 4
+-  learning_rate: 0.001
+-  schedule: adaptive
+-  gamma: 0.99
+-  lam: 0.95
+-  entropy_coef: 0.005
+-  desired_kl: 0.01
+-  max_grad_norm: 1.0
+-  value_loss_coef: 1.0
+-  use_clipped_value_loss: true
+-  clip_param: 0.2
+-  normalize_advantage_per_mini_batch: false
+-  symmetry_cfg: null
+-  rnd_cfg: null
+-clip_actions: null
+-save_interval: 50
+-experiment_name: anymal_c_navigation
+-run_name: ''
+-logger: tensorboard
+-neptune_project: isaaclab
+-wandb_project: isaaclab
+-resume: false
+-load_run: .*
+-load_checkpoint: model_.*.pt
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/params/env.pkl b/logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/params/env.pkl
+deleted file mode 100644
+index 60ae4667..00000000
+Binary files a/logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/params/env.pkl and /dev/null differ
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/params/env.yaml b/logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/params/env.yaml
+deleted file mode 100644
+index 9da833f5..00000000
+--- a/logs/rsl_rl/anymal_c_navigation/2025-07-09_10-32-31/params/env.yaml
++++ /dev/null
+@@ -1,712 +0,0 @@
+-viewer:
+-  eye: !!python/tuple
+-  - 7.5
+-  - 7.5
+-  - 7.5
+-  lookat: !!python/tuple
+-  - 0.0
+-  - 0.0
+-  - 0.0
+-  cam_prim_path: /OmniverseKit_Persp
+-  resolution: !!python/tuple
+-  - 1280
+-  - 720
+-  origin_type: world
+-  env_index: 0
+-  asset_name: null
+-  body_name: null
+-sim:
+-  physics_prim_path: /physicsScene
+-  device: cuda:0
+-  dt: 0.005
+-  render_interval: 4
+-  gravity: !!python/tuple
+-  - 0.0
+-  - 0.0
+-  - -9.81
+-  enable_scene_query_support: true
+-  use_fabric: true
+-  physx:
+-    solver_type: 1
+-    min_position_iteration_count: 1
+-    max_position_iteration_count: 255
+-    min_velocity_iteration_count: 0
+-    max_velocity_iteration_count: 255
+-    enable_ccd: false
+-    enable_stabilization: true
+-    enable_enhanced_determinism: false
+-    bounce_threshold_velocity: 0.5
+-    friction_offset_threshold: 0.04
+-    friction_correlation_distance: 0.025
+-    gpu_max_rigid_contact_count: 8388608
+-    gpu_max_rigid_patch_count: 163840
+-    gpu_found_lost_pairs_capacity: 2097152
+-    gpu_found_lost_aggregate_pairs_capacity: 33554432
+-    gpu_total_aggregate_pairs_capacity: 2097152
+-    gpu_collision_stack_size: 67108864
+-    gpu_heap_capacity: 67108864
+-    gpu_temp_buffer_capacity: 16777216
+-    gpu_max_num_partitions: 8
+-    gpu_max_soft_body_contacts: 1048576
+-    gpu_max_particle_contacts: 1048576
+-  physics_material:
+-    func: isaaclab.sim.spawners.materials.physics_materials:spawn_rigid_body_material
+-    static_friction: 0.5
+-    dynamic_friction: 0.5
+-    restitution: 0.0
+-    improve_patch_friction: true
+-    friction_combine_mode: average
+-    restitution_combine_mode: average
+-    compliant_contact_stiffness: 0.0
+-    compliant_contact_damping: 0.0
+-  render:
+-    enable_translucency: null
+-    enable_reflections: null
+-    enable_global_illumination: null
+-    antialiasing_mode: null
+-    enable_dlssg: null
+-    enable_dl_denoiser: null
+-    dlss_mode: null
+-    enable_direct_lighting: null
+-    samples_per_pixel: null
+-    enable_shadows: null
+-    enable_ambient_occlusion: null
+-    carb_settings: null
+-    rendering_mode: null
+-ui_window_class_type: isaaclab.envs.ui.manager_based_rl_env_window:ManagerBasedRLEnvWindow
+-seed: 42
+-decimation: 40
+-scene:
+-  num_envs: 3
+-  env_spacing: 2.5
+-  lazy_sensor_update: true
+-  replicate_physics: true
+-  filter_collisions: true
+-  robot:
+-    class_type: isaaclab.assets.articulation.articulation:Articulation
+-    prim_path: /World/envs/env_.*/Robot
+-    spawn:
+-      func: isaaclab.sim.spawners.from_files.from_files:spawn_from_usd
+-      visible: true
+-      semantic_tags: null
+-      copy_from_source: true
+-      mass_props: null
+-      deformable_props: null
+-      rigid_props:
+-        rigid_body_enabled: null
+-        kinematic_enabled: null
+-        disable_gravity: false
+-        linear_damping: 0.0
+-        angular_damping: 0.0
+-        max_linear_velocity: 1000.0
+-        max_angular_velocity: 1000.0
+-        max_depenetration_velocity: 1.0
+-        max_contact_impulse: null
+-        enable_gyroscopic_forces: null
+-        retain_accelerations: false
+-        solver_position_iteration_count: null
+-        solver_velocity_iteration_count: null
+-        sleep_threshold: null
+-        stabilization_threshold: null
+-      collision_props: null
+-      activate_contact_sensors: true
+-      scale: null
+-      articulation_props:
+-        articulation_enabled: null
+-        enabled_self_collisions: true
+-        solver_position_iteration_count: 4
+-        solver_velocity_iteration_count: 0
+-        sleep_threshold: null
+-        stabilization_threshold: null
+-        fix_root_link: null
+-      fixed_tendons_props: null
+-      joint_drive_props: null
+-      visual_material_path: material
+-      visual_material: null
+-      usd_path: http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/IsaacLab/Robots/ANYbotics/ANYmal-C/anymal_c.usd
+-      variants: null
+-    init_state:
+-      pos: !!python/tuple
+-      - 0.0
+-      - 0.0
+-      - 0.6
+-      rot: !!python/tuple
+-      - 1.0
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-      lin_vel: !!python/tuple
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-      ang_vel: !!python/tuple
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-      joint_pos:
+-        .*HAA: 0.0
+-        .*F_HFE: 0.4
+-        .*H_HFE: -0.4
+-        .*F_KFE: -0.8
+-        .*H_KFE: 0.8
+-      joint_vel:
+-        .*: 0.0
+-    collision_group: 0
+-    debug_vis: false
+-    articulation_root_prim_path: null
+-    soft_joint_pos_limit_factor: 0.95
+-    actuators:
+-      legs:
+-        class_type: isaaclab.actuators.actuator_net:ActuatorNetLSTM
+-        joint_names_expr:
+-        - .*HAA
+-        - .*HFE
+-        - .*KFE
+-        effort_limit: 80.0
+-        velocity_limit: 7.5
+-        effort_limit_sim: null
+-        velocity_limit_sim: null
+-        stiffness: null
+-        damping: null
+-        armature: null
+-        friction: null
+-        saturation_effort: 120.0
+-        network_file: http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/IsaacLab/ActuatorNets/ANYbotics/anydrive_3_lstm_jit.pt
+-  terrain:
+-    class_type: isaaclab.terrains.terrain_importer:TerrainImporter
+-    collision_group: -1
+-    prim_path: /World/ground
+-    num_envs: 3
+-    terrain_type: plane
+-    terrain_generator: null
+-    usd_path: null
+-    env_spacing: 2.5
+-    visual_material:
+-      func: isaaclab.sim.spawners.materials.visual_materials:spawn_from_mdl_file
+-      mdl_path: http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/IsaacLab/Materials/TilesMarbleSpiderWhiteBrickBondHoned/TilesMarbleSpiderWhiteBrickBondHoned.mdl
+-      project_uvw: true
+-      albedo_brightness: null
+-      texture_scale: !!python/tuple
+-      - 0.25
+-      - 0.25
+-    physics_material:
+-      func: isaaclab.sim.spawners.materials.physics_materials:spawn_rigid_body_material
+-      static_friction: 1.0
+-      dynamic_friction: 1.0
+-      restitution: 0.0
+-      improve_patch_friction: true
+-      friction_combine_mode: multiply
+-      restitution_combine_mode: multiply
+-      compliant_contact_stiffness: 0.0
+-      compliant_contact_damping: 0.0
+-    max_init_terrain_level: 5
+-    debug_vis: false
+-  cube:
+-    class_type: isaaclab.assets.rigid_object.rigid_object:RigidObject
+-    prim_path: /World/envs/env_.*/Cube
+-    spawn:
+-      func: isaaclab.sim.spawners.from_files.from_files:spawn_from_usd
+-      visible: true
+-      semantic_tags: null
+-      copy_from_source: true
+-      mass_props: null
+-      deformable_props: null
+-      rigid_props:
+-        rigid_body_enabled: null
+-        kinematic_enabled: false
+-        disable_gravity: null
+-        linear_damping: null
+-        angular_damping: null
+-        max_linear_velocity: null
+-        max_angular_velocity: null
+-        max_depenetration_velocity: null
+-        max_contact_impulse: null
+-        enable_gyroscopic_forces: null
+-        retain_accelerations: null
+-        solver_position_iteration_count: null
+-        solver_velocity_iteration_count: null
+-        sleep_threshold: null
+-        stabilization_threshold: null
+-      collision_props: null
+-      activate_contact_sensors: false
+-      scale: !!python/tuple
+-      - 3
+-      - 3
+-      - 3
+-      articulation_props: null
+-      fixed_tendons_props: null
+-      joint_drive_props: null
+-      visual_material_path: material
+-      visual_material: null
+-      usd_path: http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/Props/Blocks/blue_block.usd
+-      variants: null
+-    init_state:
+-      pos: !!python/tuple
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-      rot: !!python/tuple
+-      - 1.0
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-      lin_vel: !!python/tuple
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-      ang_vel: !!python/tuple
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-    collision_group: 0
+-    debug_vis: false
+-  height_scanner: null
+-  contact_forces:
+-    class_type: isaaclab.sensors.contact_sensor.contact_sensor:ContactSensor
+-    prim_path: /World/envs/env_.*/Robot/.*
+-    update_period: 0.005
+-    history_length: 3
+-    debug_vis: false
+-    track_pose: false
+-    track_air_time: true
+-    force_threshold: 1.0
+-    filter_prim_paths_expr: []
+-    visualizer_cfg:
+-      prim_path: /Visuals/ContactSensor
+-      markers:
+-        contact:
+-          func: isaaclab.sim.spawners.shapes.shapes:spawn_sphere
+-          visible: true
+-          semantic_tags: null
+-          copy_from_source: true
+-          mass_props: null
+-          rigid_props: null
+-          collision_props: null
+-          activate_contact_sensors: false
+-          visual_material_path: material
+-          visual_material:
+-            func: isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface
+-            diffuse_color: !!python/tuple
+-            - 1.0
+-            - 0.0
+-            - 0.0
+-            emissive_color: !!python/tuple
+-            - 0.0
+-            - 0.0
+-            - 0.0
+-            roughness: 0.5
+-            metallic: 0.0
+-            opacity: 1.0
+-          physics_material_path: material
+-          physics_material: null
+-          radius: 0.02
+-        no_contact:
+-          func: isaaclab.sim.spawners.shapes.shapes:spawn_sphere
+-          visible: false
+-          semantic_tags: null
+-          copy_from_source: true
+-          mass_props: null
+-          rigid_props: null
+-          collision_props: null
+-          activate_contact_sensors: false
+-          visual_material_path: material
+-          visual_material:
+-            func: isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface
+-            diffuse_color: !!python/tuple
+-            - 0.0
+-            - 1.0
+-            - 0.0
+-            emissive_color: !!python/tuple
+-            - 0.0
+-            - 0.0
+-            - 0.0
+-            roughness: 0.5
+-            metallic: 0.0
+-            opacity: 1.0
+-          physics_material_path: material
+-          physics_material: null
+-          radius: 0.02
+-  sky_light:
+-    class_type: null
+-    prim_path: /World/skyLight
+-    spawn:
+-      func: isaaclab.sim.spawners.lights.lights:spawn_light
+-      visible: true
+-      semantic_tags: null
+-      copy_from_source: true
+-      prim_type: DomeLight
+-      color: !!python/tuple
+-      - 1.0
+-      - 1.0
+-      - 1.0
+-      enable_color_temperature: false
+-      color_temperature: 6500.0
+-      normalize: false
+-      exposure: 0.0
+-      intensity: 750.0
+-      texture_file: http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/Materials/Textures/Skies/PolyHaven/kloofendal_43d_clear_puresky_4k.hdr
+-      texture_format: automatic
+-      visible_in_primary_ray: true
+-    init_state:
+-      pos: !!python/tuple
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-      rot: !!python/tuple
+-      - 1.0
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-    collision_group: 0
+-    debug_vis: false
+-recorders:
+-  dataset_file_handler_class_type: isaaclab.utils.datasets.hdf5_dataset_file_handler:HDF5DatasetFileHandler
+-  dataset_export_dir_path: /tmp/isaaclab/logs
+-  dataset_filename: dataset
+-  dataset_export_mode:
+-    _value_: 1
+-    _name_: EXPORT_ALL
+-  export_in_record_pre_reset: true
+-observations:
+-  policy:
+-    concatenate_terms: true
+-    concatenate_dim: -1
+-    enable_corruption: false
+-    history_length: null
+-    flatten_history_dim: true
+-    base_lin_vel:
+-      func: isaaclab.envs.mdp.observations:base_lin_vel
+-      params: {}
+-      modifiers: null
+-      noise: null
+-      clip: null
+-      scale: null
+-      history_length: 0
+-      flatten_history_dim: true
+-    projected_gravity:
+-      func: isaaclab.envs.mdp.observations:projected_gravity
+-      params: {}
+-      modifiers: null
+-      noise: null
+-      clip: null
+-      scale: null
+-      history_length: 0
+-      flatten_history_dim: true
+-    pose_command:
+-      func: isaaclab.envs.mdp.observations:generated_commands
+-      params:
+-        command_name: pose_command
+-      modifiers: null
+-      noise: null
+-      clip: null
+-      scale: null
+-      history_length: 0
+-      flatten_history_dim: true
+-actions:
+-  pre_trained_policy_action:
+-    class_type: isaaclab_tasks.manager_based.navigation.mdp.pre_trained_policy_action:PreTrainedPolicyAction
+-    asset_name: robot
+-    debug_vis: true
+-    clip: null
+-    policy_path: http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/IsaacLab/Policies/ANYmal-C/Blind/policy.pt
+-    low_level_decimation: 4
+-    low_level_actions:
+-      class_type: isaaclab.envs.mdp.actions.joint_actions:JointPositionAction
+-      asset_name: robot
+-      debug_vis: false
+-      clip: null
+-      joint_names:
+-      - .*
+-      scale: 0.5
+-      offset: 0.0
+-      preserve_order: false
+-      use_default_offset: true
+-    low_level_observations:
+-      concatenate_terms: true
+-      concatenate_dim: -1
+-      enable_corruption: true
+-      history_length: null
+-      flatten_history_dim: true
+-      base_lin_vel:
+-        func: isaaclab.envs.mdp.observations:base_lin_vel
+-        params: {}
+-        modifiers: null
+-        noise:
+-          func: isaaclab.utils.noise.noise_model:uniform_noise
+-          operation: add
+-          n_min: -0.1
+-          n_max: 0.1
+-        clip: null
+-        scale: null
+-        history_length: 0
+-        flatten_history_dim: true
+-      base_ang_vel:
+-        func: isaaclab.envs.mdp.observations:base_ang_vel
+-        params: {}
+-        modifiers: null
+-        noise:
+-          func: isaaclab.utils.noise.noise_model:uniform_noise
+-          operation: add
+-          n_min: -0.2
+-          n_max: 0.2
+-        clip: null
+-        scale: null
+-        history_length: 0
+-        flatten_history_dim: true
+-      projected_gravity:
+-        func: isaaclab.envs.mdp.observations:projected_gravity
+-        params: {}
+-        modifiers: null
+-        noise:
+-          func: isaaclab.utils.noise.noise_model:uniform_noise
+-          operation: add
+-          n_min: -0.05
+-          n_max: 0.05
+-        clip: null
+-        scale: null
+-        history_length: 0
+-        flatten_history_dim: true
+-      velocity_commands:
+-        func: isaaclab.envs.mdp.observations:generated_commands
+-        params:
+-          command_name: base_velocity
+-        modifiers: null
+-        noise: null
+-        clip: null
+-        scale: null
+-        history_length: 0
+-        flatten_history_dim: true
+-      joint_pos:
+-        func: isaaclab.envs.mdp.observations:joint_pos_rel
+-        params: {}
+-        modifiers: null
+-        noise:
+-          func: isaaclab.utils.noise.noise_model:uniform_noise
+-          operation: add
+-          n_min: -0.01
+-          n_max: 0.01
+-        clip: null
+-        scale: null
+-        history_length: 0
+-        flatten_history_dim: true
+-      joint_vel:
+-        func: isaaclab.envs.mdp.observations:joint_vel_rel
+-        params: {}
+-        modifiers: null
+-        noise:
+-          func: isaaclab.utils.noise.noise_model:uniform_noise
+-          operation: add
+-          n_min: -1.5
+-          n_max: 1.5
+-        clip: null
+-        scale: null
+-        history_length: 0
+-        flatten_history_dim: true
+-      actions:
+-        func: isaaclab.envs.mdp.observations:last_action
+-        params: {}
+-        modifiers: null
+-        noise: null
+-        clip: null
+-        scale: null
+-        history_length: 0
+-        flatten_history_dim: true
+-      height_scan: null
+-events:
+-  randomize_cube_positions:
+-    func: isaaclab_tasks.manager_based.manipulation.stack.mdp.franka_stack_events:randomize_object_pose
+-    params:
+-      pose_range:
+-        x: !!python/tuple
+-        - 0.4
+-        - 0.6
+-        y: !!python/tuple
+-        - -0.1
+-        - 0.1
+-        z: !!python/tuple
+-        - 0.0203
+-        - 0.0203
+-        yaw: !!python/tuple
+-        - -1.0
+-        - 1
+-        - 0
+-      min_separation: 0.1
+-      asset_cfgs:
+-      - name: cube
+-        joint_names: null
+-        joint_ids: !!python/object/apply:builtins.slice
+-        - null
+-        - null
+-        - null
+-        fixed_tendon_names: null
+-        fixed_tendon_ids: !!python/object/apply:builtins.slice
+-        - null
+-        - null
+-        - null
+-        body_names: null
+-        body_ids: !!python/object/apply:builtins.slice
+-        - null
+-        - null
+-        - null
+-        object_collection_names: null
+-        object_collection_ids: !!python/object/apply:builtins.slice
+-        - null
+-        - null
+-        - null
+-        preserve_order: false
+-    mode: reset
+-    interval_range_s: null
+-    is_global_time: false
+-    min_step_count_between_reset: 0
+-  reset_base:
+-    func: isaaclab.envs.mdp.events:reset_root_state_uniform
+-    params:
+-      pose_range:
+-        x: !!python/tuple
+-        - -0.5
+-        - 0.5
+-        y: !!python/tuple
+-        - -0.5
+-        - 0.5
+-        yaw: !!python/tuple
+-        - -3.14
+-        - 3.14
+-      velocity_range:
+-        x: !!python/tuple
+-        - -0.0
+-        - 0.0
+-        y: !!python/tuple
+-        - -0.0
+-        - 0.0
+-        z: !!python/tuple
+-        - -0.0
+-        - 0.0
+-        roll: !!python/tuple
+-        - -0.0
+-        - 0.0
+-        pitch: !!python/tuple
+-        - -0.0
+-        - 0.0
+-        yaw: !!python/tuple
+-        - -0.0
+-        - 0.0
+-    mode: reset
+-    interval_range_s: null
+-    is_global_time: false
+-    min_step_count_between_reset: 0
+-rerender_on_reset: false
+-wait_for_textures: true
+-xr: null
+-is_finite_horizon: false
+-episode_length_s: 8.0
+-rewards:
+-  termination_penalty:
+-    func: isaaclab.envs.mdp.rewards:is_terminated
+-    params: {}
+-    weight: -400.0
+-  position_tracking:
+-    func: isaaclab_tasks.manager_based.navigation.mdp.rewards:position_command_error_tanh
+-    params:
+-      std: 2.0
+-      command_name: pose_command
+-    weight: 0.5
+-  position_tracking_fine_grained:
+-    func: isaaclab_tasks.manager_based.navigation.mdp.rewards:position_command_error_tanh
+-    params:
+-      std: 0.2
+-      command_name: pose_command
+-    weight: 0.5
+-  orientation_tracking:
+-    func: isaaclab_tasks.manager_based.navigation.mdp.rewards:heading_command_error_abs
+-    params:
+-      command_name: pose_command
+-    weight: -0.2
+-terminations:
+-  time_out:
+-    func: isaaclab.envs.mdp.terminations:time_out
+-    params: {}
+-    time_out: true
+-  base_contact:
+-    func: isaaclab.envs.mdp.terminations:illegal_contact
+-    params:
+-      sensor_cfg:
+-        name: contact_forces
+-        joint_names: null
+-        joint_ids: !!python/object/apply:builtins.slice
+-        - null
+-        - null
+-        - null
+-        fixed_tendon_names: null
+-        fixed_tendon_ids: !!python/object/apply:builtins.slice
+-        - null
+-        - null
+-        - null
+-        body_names: base
+-        body_ids: !!python/object/apply:builtins.slice
+-        - null
+-        - null
+-        - null
+-        object_collection_names: null
+-        object_collection_ids: !!python/object/apply:builtins.slice
+-        - null
+-        - null
+-        - null
+-        preserve_order: false
+-      threshold: 1.0
+-    time_out: false
+-curriculum: null
+-commands:
+-  pose_command:
+-    class_type: isaaclab.envs.mdp.commands.pose_2d_command:UniformPose2dCommand
+-    resampling_time_range: !!python/tuple
+-    - 8.0
+-    - 8.0
+-    debug_vis: true
+-    asset_name: robot
+-    simple_heading: false
+-    ranges:
+-      pos_x: !!python/tuple
+-      - -3.0
+-      - 3.0
+-      pos_y: !!python/tuple
+-      - -3.0
+-      - 3.0
+-      heading: !!python/tuple
+-      - -3.141592653589793
+-      - 3.141592653589793
+-    goal_pose_visualizer_cfg:
+-      prim_path: /Visuals/Command/pose_goal
+-      markers:
+-        arrow:
+-          func: isaaclab.sim.spawners.from_files.from_files:spawn_from_usd
+-          visible: true
+-          semantic_tags: null
+-          copy_from_source: true
+-          mass_props: null
+-          deformable_props: null
+-          rigid_props: null
+-          collision_props: null
+-          activate_contact_sensors: false
+-          scale: !!python/tuple
+-          - 0.2
+-          - 0.2
+-          - 0.8
+-          articulation_props: null
+-          fixed_tendons_props: null
+-          joint_drive_props: null
+-          visual_material_path: material
+-          visual_material:
+-            func: isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface
+-            diffuse_color: !!python/tuple
+-            - 0.0
+-            - 1.0
+-            - 0.0
+-            emissive_color: !!python/tuple
+-            - 0.0
+-            - 0.0
+-            - 0.0
+-            roughness: 0.5
+-            metallic: 0.0
+-            opacity: 1.0
+-          usd_path: http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/Props/UIElements/arrow_x.usd
+-          variants: null
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/events.out.tfevents.1752055060.DESKTOP-S6CVN4S.18384.0 b/logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/events.out.tfevents.1752055060.DESKTOP-S6CVN4S.18384.0
+deleted file mode 100644
+index 15220571..00000000
+Binary files a/logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/events.out.tfevents.1752055060.DESKTOP-S6CVN4S.18384.0 and /dev/null differ
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/git/IsaacLab.diff b/logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/git/IsaacLab.diff
+deleted file mode 100644
+index 94b9e632..00000000
+--- a/logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/git/IsaacLab.diff
++++ /dev/null
+@@ -1,58 +0,0 @@
+---- git status ---
+-On branch main
+-Your branch is up to date with 'origin/main'.
+-
+-Changes not staged for commit:
+-  (use "git add <file>..." to update what will be committed)
+-  (use "git restore <file>..." to discard changes in working directory)
+-	modified:   source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/velocity_env_cfg.py
+-	modified:   source/isaaclab_tasks/isaaclab_tasks/manager_based/navigation/config/anymal_c/navigation_env_cfg.py
+-
+-no changes added to commit (use "git add" and/or "git commit -a") 
+-
+-
+---- git diff ---
+-diff --git a/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/velocity_env_cfg.py b/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/velocity_env_cfg.py
+-index 0cdd7b53..0940b035 100644
+---- a/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/velocity_env_cfg.py
+-+++ b/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/velocity_env_cfg.py
+-@@ -67,16 +67,16 @@ class MySceneCfg(InteractiveSceneCfg):
+-     # robots
+-     robot: ArticulationCfg = MISSING
+-     
+--    # cube = RigidObjectCfg(
+--    #     prim_path="{ENV_REGEX_NS}/Cube",
+--    #     spawn=UsdFileCfg(
+--    #         usd_path=f"{ISAAC_NUCLEUS_DIR}/Props/Blocks/blue_block.usd",
+--    #         scale=(3, 3, 3),
+--    #         rigid_props= RigidBodyPropertiesCfg(
+--    #             kinematic_enabled=False
+--    #         )
+--    #     )
+--    # )
+-+    cube = RigidObjectCfg(
+-+        prim_path="{ENV_REGEX_NS}/Cube",
+-+        spawn=UsdFileCfg(
+-+            usd_path=f"{ISAAC_NUCLEUS_DIR}/Props/Blocks/blue_block.usd",
+-+            scale=(3, 3, 3),
+-+            rigid_props= RigidBodyPropertiesCfg(
+-+                kinematic_enabled=False
+-+            )
+-+        )
+-+    )
+- 
+-     # sensors
+-     height_scanner = RayCasterCfg(
+-diff --git a/source/isaaclab_tasks/isaaclab_tasks/manager_based/navigation/config/anymal_c/navigation_env_cfg.py b/source/isaaclab_tasks/isaaclab_tasks/manager_based/navigation/config/anymal_c/navigation_env_cfg.py
+-index b257bc19..0c407c77 100644
+---- a/source/isaaclab_tasks/isaaclab_tasks/manager_based/navigation/config/anymal_c/navigation_env_cfg.py
+-+++ b/source/isaaclab_tasks/isaaclab_tasks/manager_based/navigation/config/anymal_c/navigation_env_cfg.py
+-@@ -32,7 +32,7 @@ class EventCfg:
+-     func=franka_stack_events.randomize_object_pose,
+-         mode="reset",
+-         params={
+--            "pose_range": {"x": (0.4, 0.6), "y": (-0.10, 0.10), "z": (0.0203, 0.0203), "yaw": (-1.0, 1, 0)},
+-+            "pose_range": {"x": (-3, 3), "y": (-3, 3), "z": (0.0203, 0.0203), "yaw": (-1.0, 1, 0)},
+-             "min_separation": 0.1,
+-             "asset_cfgs": [SceneEntityCfg("cube")],
+-         },
+\ No newline at end of file
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/model_0.pt b/logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/model_0.pt
+deleted file mode 100644
+index 27ccad94..00000000
+--- a/logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/model_0.pt
++++ /dev/null
+@@ -1,3 +0,0 @@
+-version https://git-lfs.github.com/spec/v1
+-oid sha256:ff94a7ef521e74efb058768ad40572e72125bd76305e6c3926cf16f3f9884f8f
+-size 451514
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/params/agent.pkl b/logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/params/agent.pkl
+deleted file mode 100644
+index b7a7d78b..00000000
+Binary files a/logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/params/agent.pkl and /dev/null differ
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/params/agent.yaml b/logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/params/agent.yaml
+deleted file mode 100644
+index be1ed6de..00000000
+--- a/logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/params/agent.yaml
++++ /dev/null
+@@ -1,43 +0,0 @@
+-seed: 42
+-device: cuda:0
+-num_steps_per_env: 8
+-max_iterations: 1500
+-empirical_normalization: false
+-policy:
+-  class_name: ActorCritic
+-  init_noise_std: 0.5
+-  noise_std_type: scalar
+-  actor_hidden_dims:
+-  - 128
+-  - 128
+-  critic_hidden_dims:
+-  - 128
+-  - 128
+-  activation: elu
+-algorithm:
+-  class_name: PPO
+-  num_learning_epochs: 5
+-  num_mini_batches: 4
+-  learning_rate: 0.001
+-  schedule: adaptive
+-  gamma: 0.99
+-  lam: 0.95
+-  entropy_coef: 0.005
+-  desired_kl: 0.01
+-  max_grad_norm: 1.0
+-  value_loss_coef: 1.0
+-  use_clipped_value_loss: true
+-  clip_param: 0.2
+-  normalize_advantage_per_mini_batch: false
+-  symmetry_cfg: null
+-  rnd_cfg: null
+-clip_actions: null
+-save_interval: 50
+-experiment_name: anymal_c_navigation
+-run_name: ''
+-logger: tensorboard
+-neptune_project: isaaclab
+-wandb_project: isaaclab
+-resume: false
+-load_run: .*
+-load_checkpoint: model_.*.pt
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/params/env.pkl b/logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/params/env.pkl
+deleted file mode 100644
+index 3dfba1fb..00000000
+Binary files a/logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/params/env.pkl and /dev/null differ
+diff --git a/logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/params/env.yaml b/logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/params/env.yaml
+deleted file mode 100644
+index d827bb41..00000000
+--- a/logs/rsl_rl/anymal_c_navigation/2025-07-09_11-57-29/params/env.yaml
++++ /dev/null
+@@ -1,712 +0,0 @@
+-viewer:
+-  eye: !!python/tuple
+-  - 7.5
+-  - 7.5
+-  - 7.5
+-  lookat: !!python/tuple
+-  - 0.0
+-  - 0.0
+-  - 0.0
+-  cam_prim_path: /OmniverseKit_Persp
+-  resolution: !!python/tuple
+-  - 1280
+-  - 720
+-  origin_type: world
+-  env_index: 0
+-  asset_name: null
+-  body_name: null
+-sim:
+-  physics_prim_path: /physicsScene
+-  device: cuda:0
+-  dt: 0.005
+-  render_interval: 4
+-  gravity: !!python/tuple
+-  - 0.0
+-  - 0.0
+-  - -9.81
+-  enable_scene_query_support: true
+-  use_fabric: true
+-  physx:
+-    solver_type: 1
+-    min_position_iteration_count: 1
+-    max_position_iteration_count: 255
+-    min_velocity_iteration_count: 0
+-    max_velocity_iteration_count: 255
+-    enable_ccd: false
+-    enable_stabilization: true
+-    enable_enhanced_determinism: false
+-    bounce_threshold_velocity: 0.5
+-    friction_offset_threshold: 0.04
+-    friction_correlation_distance: 0.025
+-    gpu_max_rigid_contact_count: 8388608
+-    gpu_max_rigid_patch_count: 163840
+-    gpu_found_lost_pairs_capacity: 2097152
+-    gpu_found_lost_aggregate_pairs_capacity: 33554432
+-    gpu_total_aggregate_pairs_capacity: 2097152
+-    gpu_collision_stack_size: 67108864
+-    gpu_heap_capacity: 67108864
+-    gpu_temp_buffer_capacity: 16777216
+-    gpu_max_num_partitions: 8
+-    gpu_max_soft_body_contacts: 1048576
+-    gpu_max_particle_contacts: 1048576
+-  physics_material:
+-    func: isaaclab.sim.spawners.materials.physics_materials:spawn_rigid_body_material
+-    static_friction: 0.5
+-    dynamic_friction: 0.5
+-    restitution: 0.0
+-    improve_patch_friction: true
+-    friction_combine_mode: average
+-    restitution_combine_mode: average
+-    compliant_contact_stiffness: 0.0
+-    compliant_contact_damping: 0.0
+-  render:
+-    enable_translucency: null
+-    enable_reflections: null
+-    enable_global_illumination: null
+-    antialiasing_mode: null
+-    enable_dlssg: null
+-    enable_dl_denoiser: null
+-    dlss_mode: null
+-    enable_direct_lighting: null
+-    samples_per_pixel: null
+-    enable_shadows: null
+-    enable_ambient_occlusion: null
+-    carb_settings: null
+-    rendering_mode: null
+-ui_window_class_type: isaaclab.envs.ui.manager_based_rl_env_window:ManagerBasedRLEnvWindow
+-seed: 42
+-decimation: 40
+-scene:
+-  num_envs: 3
+-  env_spacing: 2.5
+-  lazy_sensor_update: true
+-  replicate_physics: true
+-  filter_collisions: true
+-  robot:
+-    class_type: isaaclab.assets.articulation.articulation:Articulation
+-    prim_path: /World/envs/env_.*/Robot
+-    spawn:
+-      func: isaaclab.sim.spawners.from_files.from_files:spawn_from_usd
+-      visible: true
+-      semantic_tags: null
+-      copy_from_source: true
+-      mass_props: null
+-      deformable_props: null
+-      rigid_props:
+-        rigid_body_enabled: null
+-        kinematic_enabled: null
+-        disable_gravity: false
+-        linear_damping: 0.0
+-        angular_damping: 0.0
+-        max_linear_velocity: 1000.0
+-        max_angular_velocity: 1000.0
+-        max_depenetration_velocity: 1.0
+-        max_contact_impulse: null
+-        enable_gyroscopic_forces: null
+-        retain_accelerations: false
+-        solver_position_iteration_count: null
+-        solver_velocity_iteration_count: null
+-        sleep_threshold: null
+-        stabilization_threshold: null
+-      collision_props: null
+-      activate_contact_sensors: true
+-      scale: null
+-      articulation_props:
+-        articulation_enabled: null
+-        enabled_self_collisions: true
+-        solver_position_iteration_count: 4
+-        solver_velocity_iteration_count: 0
+-        sleep_threshold: null
+-        stabilization_threshold: null
+-        fix_root_link: null
+-      fixed_tendons_props: null
+-      joint_drive_props: null
+-      visual_material_path: material
+-      visual_material: null
+-      usd_path: http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/IsaacLab/Robots/ANYbotics/ANYmal-C/anymal_c.usd
+-      variants: null
+-    init_state:
+-      pos: !!python/tuple
+-      - 0.0
+-      - 0.0
+-      - 0.6
+-      rot: !!python/tuple
+-      - 1.0
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-      lin_vel: !!python/tuple
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-      ang_vel: !!python/tuple
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-      joint_pos:
+-        .*HAA: 0.0
+-        .*F_HFE: 0.4
+-        .*H_HFE: -0.4
+-        .*F_KFE: -0.8
+-        .*H_KFE: 0.8
+-      joint_vel:
+-        .*: 0.0
+-    collision_group: 0
+-    debug_vis: false
+-    articulation_root_prim_path: null
+-    soft_joint_pos_limit_factor: 0.95
+-    actuators:
+-      legs:
+-        class_type: isaaclab.actuators.actuator_net:ActuatorNetLSTM
+-        joint_names_expr:
+-        - .*HAA
+-        - .*HFE
+-        - .*KFE
+-        effort_limit: 80.0
+-        velocity_limit: 7.5
+-        effort_limit_sim: null
+-        velocity_limit_sim: null
+-        stiffness: null
+-        damping: null
+-        armature: null
+-        friction: null
+-        saturation_effort: 120.0
+-        network_file: http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/IsaacLab/ActuatorNets/ANYbotics/anydrive_3_lstm_jit.pt
+-  terrain:
+-    class_type: isaaclab.terrains.terrain_importer:TerrainImporter
+-    collision_group: -1
+-    prim_path: /World/ground
+-    num_envs: 3
+-    terrain_type: plane
+-    terrain_generator: null
+-    usd_path: null
+-    env_spacing: 2.5
+-    visual_material:
+-      func: isaaclab.sim.spawners.materials.visual_materials:spawn_from_mdl_file
+-      mdl_path: http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/IsaacLab/Materials/TilesMarbleSpiderWhiteBrickBondHoned/TilesMarbleSpiderWhiteBrickBondHoned.mdl
+-      project_uvw: true
+-      albedo_brightness: null
+-      texture_scale: !!python/tuple
+-      - 0.25
+-      - 0.25
+-    physics_material:
+-      func: isaaclab.sim.spawners.materials.physics_materials:spawn_rigid_body_material
+-      static_friction: 1.0
+-      dynamic_friction: 1.0
+-      restitution: 0.0
+-      improve_patch_friction: true
+-      friction_combine_mode: multiply
+-      restitution_combine_mode: multiply
+-      compliant_contact_stiffness: 0.0
+-      compliant_contact_damping: 0.0
+-    max_init_terrain_level: 5
+-    debug_vis: false
+-  cube:
+-    class_type: isaaclab.assets.rigid_object.rigid_object:RigidObject
+-    prim_path: /World/envs/env_.*/Cube
+-    spawn:
+-      func: isaaclab.sim.spawners.from_files.from_files:spawn_from_usd
+-      visible: true
+-      semantic_tags: null
+-      copy_from_source: true
+-      mass_props: null
+-      deformable_props: null
+-      rigid_props:
+-        rigid_body_enabled: null
+-        kinematic_enabled: false
+-        disable_gravity: null
+-        linear_damping: null
+-        angular_damping: null
+-        max_linear_velocity: null
+-        max_angular_velocity: null
+-        max_depenetration_velocity: null
+-        max_contact_impulse: null
+-        enable_gyroscopic_forces: null
+-        retain_accelerations: null
+-        solver_position_iteration_count: null
+-        solver_velocity_iteration_count: null
+-        sleep_threshold: null
+-        stabilization_threshold: null
+-      collision_props: null
+-      activate_contact_sensors: false
+-      scale: !!python/tuple
+-      - 3
+-      - 3
+-      - 3
+-      articulation_props: null
+-      fixed_tendons_props: null
+-      joint_drive_props: null
+-      visual_material_path: material
+-      visual_material: null
+-      usd_path: http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/Props/Blocks/blue_block.usd
+-      variants: null
+-    init_state:
+-      pos: !!python/tuple
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-      rot: !!python/tuple
+-      - 1.0
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-      lin_vel: !!python/tuple
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-      ang_vel: !!python/tuple
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-    collision_group: 0
+-    debug_vis: false
+-  height_scanner: null
+-  contact_forces:
+-    class_type: isaaclab.sensors.contact_sensor.contact_sensor:ContactSensor
+-    prim_path: /World/envs/env_.*/Robot/.*
+-    update_period: 0.005
+-    history_length: 3
+-    debug_vis: false
+-    track_pose: false
+-    track_air_time: true
+-    force_threshold: 1.0
+-    filter_prim_paths_expr: []
+-    visualizer_cfg:
+-      prim_path: /Visuals/ContactSensor
+-      markers:
+-        contact:
+-          func: isaaclab.sim.spawners.shapes.shapes:spawn_sphere
+-          visible: true
+-          semantic_tags: null
+-          copy_from_source: true
+-          mass_props: null
+-          rigid_props: null
+-          collision_props: null
+-          activate_contact_sensors: false
+-          visual_material_path: material
+-          visual_material:
+-            func: isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface
+-            diffuse_color: !!python/tuple
+-            - 1.0
+-            - 0.0
+-            - 0.0
+-            emissive_color: !!python/tuple
+-            - 0.0
+-            - 0.0
+-            - 0.0
+-            roughness: 0.5
+-            metallic: 0.0
+-            opacity: 1.0
+-          physics_material_path: material
+-          physics_material: null
+-          radius: 0.02
+-        no_contact:
+-          func: isaaclab.sim.spawners.shapes.shapes:spawn_sphere
+-          visible: false
+-          semantic_tags: null
+-          copy_from_source: true
+-          mass_props: null
+-          rigid_props: null
+-          collision_props: null
+-          activate_contact_sensors: false
+-          visual_material_path: material
+-          visual_material:
+-            func: isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface
+-            diffuse_color: !!python/tuple
+-            - 0.0
+-            - 1.0
+-            - 0.0
+-            emissive_color: !!python/tuple
+-            - 0.0
+-            - 0.0
+-            - 0.0
+-            roughness: 0.5
+-            metallic: 0.0
+-            opacity: 1.0
+-          physics_material_path: material
+-          physics_material: null
+-          radius: 0.02
+-  sky_light:
+-    class_type: null
+-    prim_path: /World/skyLight
+-    spawn:
+-      func: isaaclab.sim.spawners.lights.lights:spawn_light
+-      visible: true
+-      semantic_tags: null
+-      copy_from_source: true
+-      prim_type: DomeLight
+-      color: !!python/tuple
+-      - 1.0
+-      - 1.0
+-      - 1.0
+-      enable_color_temperature: false
+-      color_temperature: 6500.0
+-      normalize: false
+-      exposure: 0.0
+-      intensity: 750.0
+-      texture_file: http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/Materials/Textures/Skies/PolyHaven/kloofendal_43d_clear_puresky_4k.hdr
+-      texture_format: automatic
+-      visible_in_primary_ray: true
+-    init_state:
+-      pos: !!python/tuple
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-      rot: !!python/tuple
+-      - 1.0
+-      - 0.0
+-      - 0.0
+-      - 0.0
+-    collision_group: 0
+-    debug_vis: false
+-recorders:
+-  dataset_file_handler_class_type: isaaclab.utils.datasets.hdf5_dataset_file_handler:HDF5DatasetFileHandler
+-  dataset_export_dir_path: /tmp/isaaclab/logs
+-  dataset_filename: dataset
+-  dataset_export_mode:
+-    _value_: 1
+-    _name_: EXPORT_ALL
+-  export_in_record_pre_reset: true
+-observations:
+-  policy:
+-    concatenate_terms: true
+-    concatenate_dim: -1
+-    enable_corruption: false
+-    history_length: null
+-    flatten_history_dim: true
+-    base_lin_vel:
+-      func: isaaclab.envs.mdp.observations:base_lin_vel
+-      params: {}
+-      modifiers: null
+-      noise: null
+-      clip: null
+-      scale: null
+-      history_length: 0
+-      flatten_history_dim: true
+-    projected_gravity:
+-      func: isaaclab.envs.mdp.observations:projected_gravity
+-      params: {}
+-      modifiers: null
+-      noise: null
+-      clip: null
+-      scale: null
+-      history_length: 0
+-      flatten_history_dim: true
+-    pose_command:
+-      func: isaaclab.envs.mdp.observations:generated_commands
+-      params:
+-        command_name: pose_command
+-      modifiers: null
+-      noise: null
+-      clip: null
+-      scale: null
+-      history_length: 0
+-      flatten_history_dim: true
+-actions:
+-  pre_trained_policy_action:
+-    class_type: isaaclab_tasks.manager_based.navigation.mdp.pre_trained_policy_action:PreTrainedPolicyAction
+-    asset_name: robot
+-    debug_vis: true
+-    clip: null
+-    policy_path: http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/IsaacLab/Policies/ANYmal-C/Blind/policy.pt
+-    low_level_decimation: 4
+-    low_level_actions:
+-      class_type: isaaclab.envs.mdp.actions.joint_actions:JointPositionAction
+-      asset_name: robot
+-      debug_vis: false
+-      clip: null
+-      joint_names:
+-      - .*
+-      scale: 0.5
+-      offset: 0.0
+-      preserve_order: false
+-      use_default_offset: true
+-    low_level_observations:
+-      concatenate_terms: true
+-      concatenate_dim: -1
+-      enable_corruption: true
+-      history_length: null
+-      flatten_history_dim: true
+-      base_lin_vel:
+-        func: isaaclab.envs.mdp.observations:base_lin_vel
+-        params: {}
+-        modifiers: null
+-        noise:
+-          func: isaaclab.utils.noise.noise_model:uniform_noise
+-          operation: add
+-          n_min: -0.1
+-          n_max: 0.1
+-        clip: null
+-        scale: null
+-        history_length: 0
+-        flatten_history_dim: true
+-      base_ang_vel:
+-        func: isaaclab.envs.mdp.observations:base_ang_vel
+-        params: {}
+-        modifiers: null
+-        noise:
+-          func: isaaclab.utils.noise.noise_model:uniform_noise
+-          operation: add
+-          n_min: -0.2
+-          n_max: 0.2
+-        clip: null
+-        scale: null
+-        history_length: 0
+-        flatten_history_dim: true
+-      projected_gravity:
+-        func: isaaclab.envs.mdp.observations:projected_gravity
+-        params: {}
+-        modifiers: null
+-        noise:
+-          func: isaaclab.utils.noise.noise_model:uniform_noise
+-          operation: add
+-          n_min: -0.05
+-          n_max: 0.05
+-        clip: null
+-        scale: null
+-        history_length: 0
+-        flatten_history_dim: true
+-      velocity_commands:
+-        func: isaaclab.envs.mdp.observations:generated_commands
+-        params:
+-          command_name: base_velocity
+-        modifiers: null
+-        noise: null
+-        clip: null
+-        scale: null
+-        history_length: 0
+-        flatten_history_dim: true
+-      joint_pos:
+-        func: isaaclab.envs.mdp.observations:joint_pos_rel
+-        params: {}
+-        modifiers: null
+-        noise:
+-          func: isaaclab.utils.noise.noise_model:uniform_noise
+-          operation: add
+-          n_min: -0.01
+-          n_max: 0.01
+-        clip: null
+-        scale: null
+-        history_length: 0
+-        flatten_history_dim: true
+-      joint_vel:
+-        func: isaaclab.envs.mdp.observations:joint_vel_rel
+-        params: {}
+-        modifiers: null
+-        noise:
+-          func: isaaclab.utils.noise.noise_model:uniform_noise
+-          operation: add
+-          n_min: -1.5
+-          n_max: 1.5
+-        clip: null
+-        scale: null
+-        history_length: 0
+-        flatten_history_dim: true
+-      actions:
+-        func: isaaclab.envs.mdp.observations:last_action
+-        params: {}
+-        modifiers: null
+-        noise: null
+-        clip: null
+-        scale: null
+-        history_length: 0
+-        flatten_history_dim: true
+-      height_scan: null
+-events:
+-  randomize_cube_positions:
+-    func: isaaclab_tasks.manager_based.manipulation.stack.mdp.franka_stack_events:randomize_object_pose
+-    params:
+-      pose_range:
+-        x: !!python/tuple
+-        - -3
+-        - 3
+-        y: !!python/tuple
+-        - -3
+-        - 3
+-        z: !!python/tuple
+-        - 0.0203
+-        - 0.0203
+-        yaw: !!python/tuple
+-        - -1.0
+-        - 1
+-        - 0
+-      min_separation: 0.1
+-      asset_cfgs:
+-      - name: cube
+-        joint_names: null
+-        joint_ids: !!python/object/apply:builtins.slice
+-        - null
+-        - null
+-        - null
+-        fixed_tendon_names: null
+-        fixed_tendon_ids: !!python/object/apply:builtins.slice
+-        - null
+-        - null
+-        - null
+-        body_names: null
+-        body_ids: !!python/object/apply:builtins.slice
+-        - null
+-        - null
+-        - null
+-        object_collection_names: null
+-        object_collection_ids: !!python/object/apply:builtins.slice
+-        - null
+-        - null
+-        - null
+-        preserve_order: false
+-    mode: reset
+-    interval_range_s: null
+-    is_global_time: false
+-    min_step_count_between_reset: 0
+-  reset_base:
+-    func: isaaclab.envs.mdp.events:reset_root_state_uniform
+-    params:
+-      pose_range:
+-        x: !!python/tuple
+-        - -0.5
+-        - 0.5
+-        y: !!python/tuple
+-        - -0.5
+-        - 0.5
+-        yaw: !!python/tuple
+-        - -3.14
+-        - 3.14
+-      velocity_range:
+-        x: !!python/tuple
+-        - -0.0
+-        - 0.0
+-        y: !!python/tuple
+-        - -0.0
+-        - 0.0
+-        z: !!python/tuple
+-        - -0.0
+-        - 0.0
+-        roll: !!python/tuple
+-        - -0.0
+-        - 0.0
+-        pitch: !!python/tuple
+-        - -0.0
+-        - 0.0
+-        yaw: !!python/tuple
+-        - -0.0
+-        - 0.0
+-    mode: reset
+-    interval_range_s: null
+-    is_global_time: false
+-    min_step_count_between_reset: 0
+-rerender_on_reset: false
+-wait_for_textures: true
+-xr: null
+-is_finite_horizon: false
+-episode_length_s: 8.0
+-rewards:
+-  termination_penalty:
+-    func: isaaclab.envs.mdp.rewards:is_terminated
+-    params: {}
+-    weight: -400.0
+-  position_tracking:
+-    func: isaaclab_tasks.manager_based.navigation.mdp.rewards:position_command_error_tanh
+-    params:
+-      std: 2.0
+-      command_name: pose_command
+-    weight: 0.5
+-  position_tracking_fine_grained:
+-    func: isaaclab_tasks.manager_based.navigation.mdp.rewards:position_command_error_tanh
+-    params:
+-      std: 0.2
+-      command_name: pose_command
+-    weight: 0.5
+-  orientation_tracking:
+-    func: isaaclab_tasks.manager_based.navigation.mdp.rewards:heading_command_error_abs
+-    params:
+-      command_name: pose_command
+-    weight: -0.2
+-terminations:
+-  time_out:
+-    func: isaaclab.envs.mdp.terminations:time_out
+-    params: {}
+-    time_out: true
+-  base_contact:
+-    func: isaaclab.envs.mdp.terminations:illegal_contact
+-    params:
+-      sensor_cfg:
+-        name: contact_forces
+-        joint_names: null
+-        joint_ids: !!python/object/apply:builtins.slice
+-        - null
+-        - null
+-        - null
+-        fixed_tendon_names: null
+-        fixed_tendon_ids: !!python/object/apply:builtins.slice
+-        - null
+-        - null
+-        - null
+-        body_names: base
+-        body_ids: !!python/object/apply:builtins.slice
+-        - null
+-        - null
+-        - null
+-        object_collection_names: null
+-        object_collection_ids: !!python/object/apply:builtins.slice
+-        - null
+-        - null
+-        - null
+-        preserve_order: false
+-      threshold: 1.0
+-    time_out: false
+-curriculum: null
+-commands:
+-  pose_command:
+-    class_type: isaaclab.envs.mdp.commands.pose_2d_command:UniformPose2dCommand
+-    resampling_time_range: !!python/tuple
+-    - 8.0
+-    - 8.0
+-    debug_vis: true
+-    asset_name: robot
+-    simple_heading: false
+-    ranges:
+-      pos_x: !!python/tuple
+-      - -3.0
+-      - 3.0
+-      pos_y: !!python/tuple
+-      - -3.0
+-      - 3.0
+-      heading: !!python/tuple
+-      - -3.141592653589793
+-      - 3.141592653589793
+-    goal_pose_visualizer_cfg:
+-      prim_path: /Visuals/Command/pose_goal
+-      markers:
+-        arrow:
+-          func: isaaclab.sim.spawners.from_files.from_files:spawn_from_usd
+-          visible: true
+-          semantic_tags: null
+-          copy_from_source: true
+-          mass_props: null
+-          deformable_props: null
+-          rigid_props: null
+-          collision_props: null
+-          activate_contact_sensors: false
+-          scale: !!python/tuple
+-          - 0.2
+-          - 0.2
+-          - 0.8
+-          articulation_props: null
+-          fixed_tendons_props: null
+-          joint_drive_props: null
+-          visual_material_path: material
+-          visual_material:
+-            func: isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface
+-            diffuse_color: !!python/tuple
+-            - 0.0
+-            - 1.0
+-            - 0.0
+-            emissive_color: !!python/tuple
+-            - 0.0
+-            - 0.0
+-            - 0.0
+-            roughness: 0.5
+-            metallic: 0.0
+-            opacity: 1.0
+-          usd_path: http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/Props/UIElements/arrow_x.usd
+-          variants: null
+diff --git a/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/blind_navigation.py b/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/blind_navigation.py
+index cd01a3c3..a3dfdee1 100644
+--- a/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/blind_navigation.py
++++ b/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/blind_navigation.py
+@@ -36,16 +36,29 @@ class H1Rewards(RewardsCfg):
+ 
+ #code not being used now
+ 
++    # position_tracking = RewTerm(
++    #     func=mdp.position_command_error_tanh_navigation,
++    #     weight=2,
++    #     params={"std": 4, "command_name": "pose_command"},
++    # )
++    # position_tracking_fine_grained = RewTerm(
++    #     func=mdp.position_command_error_tanh_navigation,
++    #     weight=0.5,
++    #     params={"std": 0.4, "command_name": "pose_command"},
++    # )
++
+     position_tracking = RewTerm(
+-        func=mdp.position_command_error_tanh_navigation,
+-        weight=0.5,
+-        params={"std": 4, "command_name": "pose_command"},
+-    )
+-    position_tracking_fine_grained = RewTerm(
+-        func=mdp.position_command_error_tanh_navigation,
+-        weight=0.5,
+-        params={"std": 0.4, "command_name": "pose_command"},
++        func=mdp.position_command_error_tanh_combined,
++        weight=2.0,
++        params={
++            "command_name": "pose_command",
++            "coarse_std": 4.0,  # std for coarse tracking
++            "fine_std": 0.5,  # std for fine tracking
++            "fine_thresh": 0.8,
++        }
+     )
++
++
+     orientation_tracking = RewTerm(
+         func=mdp.heading_command_error_abs,
+         weight=-0.2,
+@@ -53,6 +66,17 @@ class H1Rewards(RewardsCfg):
+     )
+ 
+ 
++    stand_still = RewTerm(
++        func=mdp.reward_stand_still_at_target,
++        weight=1.0,
++        params={
++            "command_name": "pose_command",
++            "dist_thresh": 0.5,  # Activate when within 0.5m of target
++            "lin_vel_std": 0.2,  # Encourages linear velocity to be < 0.2 m/s
++            "ang_vel_std": 0.2,  # Encourages angular velocity to be < 0.2 rad/s
++        },
++    )
++
+ #navigation related code from blind_3 paper
+ 
+     terminal_reward = RewTerm(
+@@ -73,16 +97,15 @@ class H1Rewards(RewardsCfg):
+         params={"remove_threshold": 0.5}  # 0.5 corresponds to 50% of maximum terminal reward.
+     )
+ 
+-
+-    stop_reward = RewTerm(
+-        func=mdp.compute_stop_reward,
+-        weight=-2.0,  # adjust weight as needed
+-        params={
+-            "dist_threshold": 0.1,  # robot is considered "at the target" when within 0.2 m
+-            "vel_threshold": 0.01,  # robot should be nearly stationary below 0.05 m/s
+-            "stop_penalty": -20.0  # penalty applied when the robot is close but still moving
+-        }
+-    )
++    # stop_reward = RewTerm(
++    #     func=mdp.compute_stop_reward,
++    #     weight=-2.0,  # adjust weight as needed
++    #     params={
++    #         "dist_threshold": 0.1,  # robot is considered "at the target" when within 0.2 m
++    #         "vel_threshold": 0.01,  # robot should be nearly stationary below 0.05 m/s
++    #         "stop_penalty": -20.0  # penalty applied when the robot is close but still moving
++    #     }
++    # )
+ 
+     lin_vel_z_l2 = RewTerm(
+         func=mdp.lin_vel_z_l2,
+@@ -91,11 +114,11 @@ class H1Rewards(RewardsCfg):
+ 
+     track_lin_vel_xy_exp = RewTerm(
+         func=mdp.track_lin_vel_xy_yaw_frame_exp,
+-        weight=0.00001,
++        weight=0.1,
+         params={"command_name": "base_velocity", "std": 0.5},
+     )
+     track_ang_vel_z_exp = RewTerm(
+-        func=mdp.track_ang_vel_z_world_exp, weight=0.00001, params={"command_name": "base_velocity", "std": 0.5}
++        func=mdp.track_ang_vel_z_world_exp, weight=0.1, params={"command_name": "base_velocity", "std": 0.5}
+     )
+     feet_air_time = RewTerm(
+         func=mdp.feet_air_time_positive_biped,
+@@ -168,9 +191,9 @@ class H1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
+ 
+         # Rewards
+         self.rewards.undesired_contacts = None
+-        self.rewards.flat_orientation_l2.weight = -1.0
++        self.rewards.flat_orientation_l2.weight = -2.0
+         self.rewards.dof_torques_l2.weight = 0.0
+-        self.rewards.action_rate_l2.weight = -0.005
++        self.rewards.action_rate_l2.weight = -0.1
+         self.rewards.dof_acc_l2.weight = -1.25e-7
+ 
+         # Commands
+@@ -193,7 +216,6 @@ class H1RoughEnvCfg_PLAY(H1RoughEnvCfg):
+         self.scene.env_spacing = 4
+         self.episode_length_s = 8
+ 
+-
+         self.commands.base_velocity.ranges.lin_vel_x = (1.0, 1.0)
+         self.commands.base_velocity.ranges.lin_vel_y = (0.0, 0.0)
+         self.commands.base_velocity.ranges.ang_vel_z = (-1.0, 1.0)
+diff --git a/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/h1_navigation_cfg.py b/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/h1_navigation_cfg.py
+index 2137e099..0a614a51 100644
+--- a/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/h1_navigation_cfg.py
++++ b/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/h1/h1_navigation_cfg.py
+@@ -99,7 +99,7 @@ class CommandsCfg:
+     )
+     pose_command = mdp.UniformPose2dCommandCfg(
+         asset_name="robot",
+-        simple_heading=True,
++        simple_heading=False,
+         resampling_time_range=(8, 8),
+         debug_vis=True,
+         # Generate a tensor with [pos_x, pos_y, heading]
+@@ -251,12 +251,12 @@ class RewardsCfg:
+     """Reward terms for the MDP."""
+ 
+     # -- task
+-    # track_lin_vel_xy_exp = RewTerm(
+-    #     func=mdp.track_lin_vel_xy_exp, weight=1.0, params={"command_name": "base_velocity", "std": math.sqrt(0.25)}
+-    # )
+-    # track_ang_vel_z_exp = RewTerm(
+-    #     func=mdp.track_ang_vel_z_exp, weight=0.5, params={"command_name": "base_velocity", "std": math.sqrt(0.25)}
+-    # )
++    track_lin_vel_xy_exp = RewTerm(
++        func=mdp.track_lin_vel_xy_exp, weight=1.0, params={"command_name": "base_velocity", "std": math.sqrt(0.25)}
++    )
++    track_ang_vel_z_exp = RewTerm(
++        func=mdp.track_ang_vel_z_exp, weight=0.5, params={"command_name": "base_velocity", "std": math.sqrt(0.25)}
++    )
+     # -- penalties
+     lin_vel_z_l2 = RewTerm(func=mdp.lin_vel_z_l2, weight=-2.0)
+     ang_vel_xy_l2 = RewTerm(func=mdp.ang_vel_xy_l2, weight=-0.05)
+@@ -316,9 +316,6 @@ class LocomotionVelocityRoughEnvCfg(ManagerBasedRLEnvCfg):
+     commands: CommandsCfg = CommandsCfg()
+     # MDP settings
+     rewards: RewardsCfg = RewardsCfg()
+-
+-    commands: CommandsCfg = CommandsCfg()  # Make sure this is initialized
+-
+     terminations: TerminationsCfg = TerminationsCfg()
+     events: EventCfg = EventCfg()
+     # curriculum: CurriculumCfg = CurriculumCfg()
+diff --git a/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/mdp/rewards.py b/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/mdp/rewards.py
+index 0a4e3d72..09c77469 100644
+--- a/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/mdp/rewards.py
++++ b/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/mdp/rewards.py
+@@ -254,3 +254,57 @@ def stand_still_joint_deviation_l1(
+     command = env.command_manager.get_command(command_name)
+     # Penalize motion when command is nearly zero.
+     return mdp.joint_deviation_l1(env, asset_cfg) * (torch.norm(command[:, :2], dim=1) < command_threshold)
++
++
++def position_command_error_tanh_combined(
++    env: ManagerBasedRLEnv,
++    command_name: str,
++    coarse_std: float,
++    fine_std: float,
++    fine_thresh: float,
++) -> torch.Tensor:
++    """Reward position tracking with a combined coarse and fine-grained tanh kernel.
++
++    This function provides a coarse reward for getting into the general vicinity of the target
++    and a more fine-grained reward for precise positioning once close.
++    """
++    command = env.command_manager.get_command(command_name)
++    # command is [x, y, heading] in the robot's base frame
++    des_pos_b = command[:, :2]
++    distance = torch.norm(des_pos_b, dim=1)
++
++    # Coarse reward (always active)
++    coarse_reward = 1 - torch.tanh(distance / coarse_std)
++
++    # Fine-grained reward (active only when close to the target)
++    # Create a mask for environments where the robot is within the fine-grained threshold
++    fine_mask = (distance < fine_thresh).float()
++    fine_reward = 1 - torch.tanh(distance / fine_std)
++
++    # Combine the rewards: use fine-grained reward when close, otherwise just coarse
++    # The mask ensures the fine-grained component is only added when the condition is met.
++    # We add the coarse reward to ensure there's always a signal.
++    return coarse_reward + fine_mask * fine_reward
++
++def reward_stand_still_at_target(
++    env: ManagerBasedRLEnv, command_name: str, dist_thresh: float, lin_vel_std: float, ang_vel_std: float
++) -> torch.Tensor:
++    """Rewards the agent for standing still when close to the target position."""
++    command = env.command_manager.get_command(command_name)
++    # Target position in the robot's base frame
++    des_pos_b = command[:, :2]
++    distance = torch.norm(des_pos_b, dim=1)
++
++    # Current velocities
++    base_lin_vel = torch.norm(env.scene["robot"].data.root_lin_vel_w[:, :2], dim=1)
++    base_ang_vel = torch.abs(env.scene["robot"].data.root_ang_vel_w[:, 2])
++
++    # Exponentially shaped reward for low velocity
++    lin_vel_reward = torch.exp(-base_lin_vel**2 / lin_vel_std**2)
++    ang_vel_reward = torch.exp(-base_ang_vel**2 / ang_vel_std**2)
++
++    # Create a mask to apply this reward only when the robot is close to the target
++    close_to_target_mask = (distance < dist_thresh).float()
++
++    # The final reward is the sum of velocity rewards, activated only when near the target
++    return (lin_vel_reward + ang_vel_reward) * close_to_target_mask
+\ No newline at end of file
