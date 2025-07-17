@@ -99,7 +99,7 @@ class CommandsCfg:
     )
     pose_command = mdp.UniformPose2dCommandCfg(
         asset_name="robot",
-        simple_heading=True,
+        simple_heading=False,
         resampling_time_range=(8, 8),
         debug_vis=True,
         # Generate a tensor with [pos_x, pos_y, heading]
@@ -251,12 +251,12 @@ class RewardsCfg:
     """Reward terms for the MDP."""
 
     # -- task
-    # track_lin_vel_xy_exp = RewTerm(
-    #     func=mdp.track_lin_vel_xy_exp, weight=1.0, params={"command_name": "base_velocity", "std": math.sqrt(0.25)}
-    # )
-    # track_ang_vel_z_exp = RewTerm(
-    #     func=mdp.track_ang_vel_z_exp, weight=0.5, params={"command_name": "base_velocity", "std": math.sqrt(0.25)}
-    # )
+    track_lin_vel_xy_exp = RewTerm(
+        func=mdp.track_lin_vel_xy_exp, weight=1.0, params={"command_name": "base_velocity", "std": math.sqrt(0.25)}
+    )
+    track_ang_vel_z_exp = RewTerm(
+        func=mdp.track_ang_vel_z_exp, weight=0.5, params={"command_name": "base_velocity", "std": math.sqrt(0.25)}
+    )
     # -- penalties
     lin_vel_z_l2 = RewTerm(func=mdp.lin_vel_z_l2, weight=-2.0)
     ang_vel_xy_l2 = RewTerm(func=mdp.ang_vel_xy_l2, weight=-0.05)
@@ -316,9 +316,6 @@ class LocomotionVelocityRoughEnvCfg(ManagerBasedRLEnvCfg):
     commands: CommandsCfg = CommandsCfg()
     # MDP settings
     rewards: RewardsCfg = RewardsCfg()
-
-    commands: CommandsCfg = CommandsCfg()  # Make sure this is initialized
-
     terminations: TerminationsCfg = TerminationsCfg()
     events: EventCfg = EventCfg()
     # curriculum: CurriculumCfg = CurriculumCfg()

@@ -36,22 +36,46 @@ class H1Rewards(RewardsCfg):
 
 #code not being used now
 
+    # position_tracking = RewTerm(
+    #     func=mdp.position_command_error_tanh_navigation,
+    #     weight=2,
+    #     params={"std": 4, "command_name": "pose_command"},
+    # )
+    # position_tracking_fine_grained = RewTerm(
+    #     func=mdp.position_command_error_tanh_navigation,
+    #     weight=0.5,
+    #     params={"std": 0.4, "command_name": "pose_command"},
+    # )
+
     position_tracking = RewTerm(
-        func=mdp.position_command_error_tanh_navigation,
-        weight=0.5,
-        params={"std": 4, "command_name": "pose_command"},
+        func=mdp.position_command_error_tanh_combined,
+        weight=2.0,
+        params={
+            "command_name": "pose_command",
+            "coarse_std": 4.0,  # std for coarse tracking
+            "fine_std": 0.5,  # std for fine tracking
+            "fine_thresh": 0.8,
+        }
     )
-    position_tracking_fine_grained = RewTerm(
-        func=mdp.position_command_error_tanh_navigation,
-        weight=0.5,
-        params={"std": 0.4, "command_name": "pose_command"},
-    )
+
+
     orientation_tracking = RewTerm(
         func=mdp.heading_command_error_abs,
         weight=-0.2,
         params={"command_name": "pose_command"},
     )
 
+
+    stand_still = RewTerm(
+        func=mdp.reward_stand_still_at_target,
+        weight=1.0,
+        params={
+            "command_name": "pose_command",
+            "dist_thresh": 0.5,  # Activate when within 0.5m of target
+            "lin_vel_std": 0.2,  # Encourages linear velocity to be < 0.2 m/s
+            "ang_vel_std": 0.2,  # Encourages angular velocity to be < 0.2 rad/s
+        },
+    )
 
 #navigation related code from blind_3 paper
 
@@ -73,16 +97,15 @@ class H1Rewards(RewardsCfg):
         params={"remove_threshold": 0.5}  # 0.5 corresponds to 50% of maximum terminal reward.
     )
 
-
-    stop_reward = RewTerm(
-        func=mdp.compute_stop_reward,
-        weight=-2.0,  # adjust weight as needed
-        params={
-            "dist_threshold": 0.1,  # robot is considered "at the target" when within 0.2 m
-            "vel_threshold": 0.01,  # robot should be nearly stationary below 0.05 m/s
-            "stop_penalty": -20.0  # penalty applied when the robot is close but still moving
-        }
-    )
+    # stop_reward = RewTerm(
+    #     func=mdp.compute_stop_reward,
+    #     weight=-2.0,  # adjust weight as needed
+    #     params={
+    #         "dist_threshold": 0.1,  # robot is considered "at the target" when within 0.2 m
+    #         "vel_threshold": 0.01,  # robot should be nearly stationary below 0.05 m/s
+    #         "stop_penalty": -20.0  # penalty applied when the robot is close but still moving
+    #     }
+    # )
 
     lin_vel_z_l2 = RewTerm(
         func=mdp.lin_vel_z_l2,
@@ -91,11 +114,11 @@ class H1Rewards(RewardsCfg):
 
     track_lin_vel_xy_exp = RewTerm(
         func=mdp.track_lin_vel_xy_yaw_frame_exp,
-        weight=0.00001,
+        weight=0.1,
         params={"command_name": "base_velocity", "std": 0.5},
     )
     track_ang_vel_z_exp = RewTerm(
-        func=mdp.track_ang_vel_z_world_exp, weight=0.00001, params={"command_name": "base_velocity", "std": 0.5}
+        func=mdp.track_ang_vel_z_world_exp, weight=0.1, params={"command_name": "base_velocity", "std": 0.5}
     )
     feet_air_time = RewTerm(
         func=mdp.feet_air_time_positive_biped,
@@ -168,9 +191,9 @@ class H1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
 
         # Rewards
         self.rewards.undesired_contacts = None
-        self.rewards.flat_orientation_l2.weight = -1.0
+        self.rewards.flat_orientation_l2.weight = -2.0
         self.rewards.dof_torques_l2.weight = 0.0
-        self.rewards.action_rate_l2.weight = -0.005
+        self.rewards.action_rate_l2.weight = -0.1
         self.rewards.dof_acc_l2.weight = -1.25e-7
 
         # Commands
@@ -193,11 +216,12 @@ class H1RoughEnvCfg_PLAY(H1RoughEnvCfg):
         self.scene.env_spacing = 4
         self.episode_length_s = 8
 
-
         self.commands.base_velocity.ranges.lin_vel_x = (1.0, 1.0)
         self.commands.base_velocity.ranges.lin_vel_y = (0.0, 0.0)
         self.commands.base_velocity.ranges.ang_vel_z = (-1.0, 1.0)
         self.commands.base_velocity.ranges.heading = (0.0, 0.0)
+        self.commands.base_velocity.debug_vis = False
+        self.commands.pose_command.debug_vis = False
         # disable randomization for play
         self.observations.policy.enable_corruption = False
         # remove random pushing

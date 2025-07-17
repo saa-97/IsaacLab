@@ -254,3 +254,57 @@ def stand_still_joint_deviation_l1(
     command = env.command_manager.get_command(command_name)
     # Penalize motion when command is nearly zero.
     return mdp.joint_deviation_l1(env, asset_cfg) * (torch.norm(command[:, :2], dim=1) < command_threshold)
+
+
+def position_command_error_tanh_combined(
+    env: ManagerBasedRLEnv,
+    command_name: str,
+    coarse_std: float,
+    fine_std: float,
+    fine_thresh: float,
+) -> torch.Tensor:
+    """Reward position tracking with a combined coarse and fine-grained tanh kernel.
+
+    This function provides a coarse reward for getting into the general vicinity of the target
+    and a more fine-grained reward for precise positioning once close.
+    """
+    command = env.command_manager.get_command(command_name)
+    # command is [x, y, heading] in the robot's base frame
+    des_pos_b = command[:, :2]
+    distance = torch.norm(des_pos_b, dim=1)
+
+    # Coarse reward (always active)
+    coarse_reward = 1 - torch.tanh(distance / coarse_std)
+
+    # Fine-grained reward (active only when close to the target)
+    # Create a mask for environments where the robot is within the fine-grained threshold
+    fine_mask = (distance < fine_thresh).float()
+    fine_reward = 1 - torch.tanh(distance / fine_std)
+
+    # Combine the rewards: use fine-grained reward when close, otherwise just coarse
+    # The mask ensures the fine-grained component is only added when the condition is met.
+    # We add the coarse reward to ensure there's always a signal.
+    return coarse_reward + fine_mask * fine_reward
+
+def reward_stand_still_at_target(
+    env: ManagerBasedRLEnv, command_name: str, dist_thresh: float, lin_vel_std: float, ang_vel_std: float
+) -> torch.Tensor:
+    """Rewards the agent for standing still when close to the target position."""
+    command = env.command_manager.get_command(command_name)
+    # Target position in the robot's base frame
+    des_pos_b = command[:, :2]
+    distance = torch.norm(des_pos_b, dim=1)
+
+    # Current velocities
+    base_lin_vel = torch.norm(env.scene["robot"].data.root_lin_vel_w[:, :2], dim=1)
+    base_ang_vel = torch.abs(env.scene["robot"].data.root_ang_vel_w[:, 2])
+
+    # Exponentially shaped reward for low velocity
+    lin_vel_reward = torch.exp(-base_lin_vel**2 / lin_vel_std**2)
+    ang_vel_reward = torch.exp(-base_ang_vel**2 / ang_vel_std**2)
+
+    # Create a mask to apply this reward only when the robot is close to the target
+    close_to_target_mask = (distance < dist_thresh).float()
+
+    # The final reward is the sum of velocity rewards, activated only when near the target
+    return (lin_vel_reward + ang_vel_reward) * close_to_target_mask
