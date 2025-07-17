@@ -58,13 +58,11 @@ class H1Rewards(RewardsCfg):
         }
     )
 
-
     orientation_tracking = RewTerm(
         func=mdp.heading_command_error_abs,
         weight=-0.2,
         params={"command_name": "pose_command"},
     )
-
 
     stand_still = RewTerm(
         func=mdp.reward_stand_still_at_target,
