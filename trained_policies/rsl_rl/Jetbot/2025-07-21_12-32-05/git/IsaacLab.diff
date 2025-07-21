@@ -1,0 +1,162 @@
+--- git status ---
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   IsaacLab (new commits)
+	modified:   source/isaaclab_tasks/isaaclab_tasks/manager_based/jetbotnavigation/jetbotnavigation_env_cfg.py
+	modified:   source/isaaclab_tasks/isaaclab_tasks/manager_based/jetbotnavigation/mdp/rewards.py
+
+no changes added to commit (use "git add" and/or "git commit -a") 
+
+
+--- git diff ---
+diff --git a/IsaacLab b/IsaacLab
+index 84d5d5ad..bfc8887c 160000
+--- a/IsaacLab
++++ b/IsaacLab
+@@ -1 +1 @@
+-Subproject commit 84d5d5ad3d4275bf9a60b8e088967916d550376f
++Subproject commit bfc8887c50839c2f11d2b75da96e4328accb173b
+diff --git a/source/isaaclab_tasks/isaaclab_tasks/manager_based/jetbotnavigation/jetbotnavigation_env_cfg.py b/source/isaaclab_tasks/isaaclab_tasks/manager_based/jetbotnavigation/jetbotnavigation_env_cfg.py
+index eb499677..37efe162 100644
+--- a/source/isaaclab_tasks/isaaclab_tasks/manager_based/jetbotnavigation/jetbotnavigation_env_cfg.py
++++ b/source/isaaclab_tasks/isaaclab_tasks/manager_based/jetbotnavigation/jetbotnavigation_env_cfg.py
+@@ -136,18 +136,33 @@ class EventCfg:
+ class RewardsCfg:
+     """Reward terms for the MDP."""
+ 
+-    # -- task
+-    position_tracking = RewTerm(
+-        func=mdp.position_command_error_tanh_navigation, weight=2.0, params={"command_name": "base_pose", "std": 1.0}
++    # -- task: main navigation rewards
++    # Combined forward velocity and alignment reward (primary reward)
++    forward_velocity_alignment = RewTerm(
++        func=mdp.forward_velocity_alignment_combined, 
++        weight=3.0, 
++        params={"command_name": "base_pose", "asset_cfg": SceneEntityCfg("robot")}
+     )
+-    heading_tracking = RewTerm(
+-        func=mdp.heading_command_error_abs, weight=0.5, params={"command_name": "base_pose"}
++    
++    # Distance to target reward (secondary reward)
++    distance_to_target = RewTerm(
++        func=mdp.distance_to_target_reward, 
++        weight=1.0, 
++        params={"command_name": "base_pose", "std": 2.0}
++    )
++    
++    # -- penalties: prevent unwanted behaviors
++    # Strong penalty for backward motion
++    backward_penalty = RewTerm(
++        func=mdp.backward_velocity_penalty, 
++        weight=-5.0, 
++        params={"asset_cfg": SceneEntityCfg("robot")}
+     )
+-    # -- penalties
++    
++    # Stability penalties
+     lin_vel_z_l2 = RewTerm(func=mdp.lin_vel_z_l2, weight=-2.0)
+     ang_vel_xy_l2 = RewTerm(func=mdp.ang_vel_xy_l2, weight=-0.05)
+     action_rate_l2 = RewTerm(func=mdp.action_rate_l2, weight=-0.01)
+-    # -- additional stability
+     action_l2 = RewTerm(func=mdp.action_l2, weight=-0.001)
+ 
+ @configclass
+diff --git a/source/isaaclab_tasks/isaaclab_tasks/manager_based/jetbotnavigation/mdp/rewards.py b/source/isaaclab_tasks/isaaclab_tasks/manager_based/jetbotnavigation/mdp/rewards.py
+index 21bec42d..b9e89aed 100644
+--- a/source/isaaclab_tasks/isaaclab_tasks/manager_based/jetbotnavigation/mdp/rewards.py
++++ b/source/isaaclab_tasks/isaaclab_tasks/manager_based/jetbotnavigation/mdp/rewards.py
+@@ -11,6 +11,7 @@ from typing import TYPE_CHECKING
+ from isaaclab.assets import Articulation
+ from isaaclab.managers import SceneEntityCfg
+ from isaaclab.utils.math import wrap_to_pi
++import isaaclab.utils.math as math_utils
+ 
+ if TYPE_CHECKING:
+     from isaaclab.envs import ManagerBasedRLEnv
+@@ -39,3 +40,82 @@ def heading_command_error_abs(env: ManagerBasedRLEnv, command_name: str) -> torc
+     command = env.command_manager.get_command(command_name)
+     heading_b = command[:, 3]
+     return -heading_b.abs()  # Negative absolute heading error: reward gets higher when facing target
++
++
++def forward_velocity_reward(env: ManagerBasedRLEnv, asset_cfg: SceneEntityCfg) -> torch.Tensor:
++    """Reward forward velocity in the robot's body frame (prevents backward driving)."""
++    asset: Articulation = env.scene[asset_cfg.name]
++    # Only reward positive (forward) velocities, penalize backward motion
++    forward_vel = asset.data.root_com_lin_vel_b[:, 0]  # x-component in body frame
++    return torch.clamp(forward_vel, min=0.0)  # Only positive forward velocities get reward
++
++
++def alignment_reward_exp(env: ManagerBasedRLEnv, command_name: str, asset_cfg: SceneEntityCfg) -> torch.Tensor:
++    """Reward alignment between robot's forward direction and target direction using exponential kernel."""
++    asset: Articulation = env.scene[asset_cfg.name]
++    command = env.command_manager.get_command(command_name)
++    target_pos = command[:, :3]  # Target position relative to robot
++    
++    # Get robot's forward direction vector in world frame
++    forward_vec = math_utils.quat_apply(asset.data.root_quat_w, asset.data.FORWARD_VEC_B)
++    
++    # Normalize target direction (from robot to target)
++    target_direction = target_pos / (torch.norm(target_pos, dim=1, keepdim=True) + 1e-8)
++    
++    # Compute alignment (dot product)
++    alignment = torch.sum(forward_vec * target_direction, dim=1)
++    
++    # Use exponential to map [-1, 1] to [e^-1, e^1] ≈ [0.37, 2.72]
++    # This prevents negative rewards when misaligned and amplifies positive alignment
++    return torch.exp(alignment)
++
++
++def forward_velocity_alignment_combined(env: ManagerBasedRLEnv, command_name: str, asset_cfg: SceneEntityCfg) -> torch.Tensor:
++    """Combined reward: forward velocity multiplied by alignment to encourage forward driving toward target.
++    
++    This implements the approach from the IsaacLab tutorial where the robot gets rewarded for:
++    1. Driving forward (positive forward velocity)
++    2. Being aligned with the target direction
++    
++    The multiplication ensures the robot only gets high rewards when BOTH conditions are met.
++    """
++    asset: Articulation = env.scene[asset_cfg.name]
++    command = env.command_manager.get_command(command_name)
++    target_pos = command[:, :3]  # Target position relative to robot
++    
++    # Forward velocity in body frame (only positive values)
++    forward_vel = torch.clamp(asset.data.root_com_lin_vel_b[:, 0], min=0.0)
++    
++    # Get robot's forward direction vector in world frame
++    forward_vec = math_utils.quat_apply(asset.data.root_quat_w, asset.data.FORWARD_VEC_B)
++    
++    # Normalize target direction (from robot to target)
++    target_direction = target_pos / (torch.norm(target_pos, dim=1, keepdim=True) + 1e-8)
++    
++    # Compute alignment (dot product)
++    alignment = torch.sum(forward_vec * target_direction, dim=1)
++    
++    # Use exponential to ensure positive scaling
++    alignment_scaled = torch.exp(alignment)
++    
++    # Multiply forward velocity by alignment: high reward only when moving forward AND aligned
++    return forward_vel * alignment_scaled
++
++
++def distance_to_target_reward(env: ManagerBasedRLEnv, command_name: str, std: float = 1.0) -> torch.Tensor:
++    """Reward decreasing distance to target using exponential kernel."""
++    command = env.command_manager.get_command(command_name)
++    target_pos = command[:, :3]  # Target position relative to robot
++    distance = torch.norm(target_pos, dim=1)
++    
++    # Use exponential decay: closer to target = higher reward
++    return torch.exp(-distance / std)
++
++
++def backward_velocity_penalty(env: ManagerBasedRLEnv, asset_cfg: SceneEntityCfg) -> torch.Tensor:
++    """Penalize backward motion to ensure robot only drives forward."""
++    asset: Articulation = env.scene[asset_cfg.name]
++    forward_vel = asset.data.root_com_lin_vel_b[:, 0]  # x-component in body frame
++    
++    # Return negative penalty for backward motion (when forward_vel < 0)
++    return torch.clamp(forward_vel, max=0.0)  # Only negative (backward) velocities contribute

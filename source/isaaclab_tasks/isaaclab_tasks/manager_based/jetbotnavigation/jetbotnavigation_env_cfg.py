@@ -136,18 +136,33 @@ class EventCfg:
 class RewardsCfg:
     """Reward terms for the MDP."""
 
-    # -- task
-    position_tracking = RewTerm(
-        func=mdp.position_command_error_tanh_navigation, weight=2.0, params={"command_name": "base_pose", "std": 1.0}
+    # -- task: main navigation rewards
+    # Combined forward velocity and alignment reward (primary reward)
+    forward_velocity_alignment = RewTerm(
+        func=mdp.forward_velocity_alignment_combined, 
+        weight=3.0, 
+        params={"command_name": "base_pose", "asset_cfg": SceneEntityCfg("robot")}
     )
-    heading_tracking = RewTerm(
-        func=mdp.heading_command_error_abs, weight=0.5, params={"command_name": "base_pose"}
+    
+    # Distance to target reward (secondary reward)
+    distance_to_target = RewTerm(
+        func=mdp.distance_to_target_reward, 
+        weight=1.0, 
+        params={"command_name": "base_pose", "std": 2.0}
     )
-    # -- penalties
+    
+    # -- penalties: prevent unwanted behaviors
+    # Strong penalty for backward motion
+    backward_penalty = RewTerm(
+        func=mdp.backward_velocity_penalty, 
+        weight=-5.0, 
+        params={"asset_cfg": SceneEntityCfg("robot")}
+    )
+    
+    # Stability penalties
     lin_vel_z_l2 = RewTerm(func=mdp.lin_vel_z_l2, weight=-2.0)
     ang_vel_xy_l2 = RewTerm(func=mdp.ang_vel_xy_l2, weight=-0.05)
     action_rate_l2 = RewTerm(func=mdp.action_rate_l2, weight=-0.01)
-    # -- additional stability
     action_l2 = RewTerm(func=mdp.action_l2, weight=-0.001)
 
 @configclass
@@ -200,8 +215,8 @@ class JetbotnavigationEnvCfg_PLAY(JetbotnavigationEnvCfg):
         self.scene.num_envs = 50
         self.scene.env_spacing = 4.0
         # commands - use larger range for play
-        self.commands.base_pose.ranges.pos_x = (-8.0, 8.0)
-        self.commands.base_pose.ranges.pos_y = (-8.0, 8.0)
+        self.commands.base_pose.ranges.pos_x = (-3.0, 3.0)
+        self.commands.base_pose.ranges.pos_y = (-3.0, 3.0)
         # velocity commands for visualization
         self.commands.base_velocity.ranges.lin_vel_x = (1.5, 4.0)
         self.commands.base_velocity.ranges.ang_vel_z = (-3.0, 3.0)
