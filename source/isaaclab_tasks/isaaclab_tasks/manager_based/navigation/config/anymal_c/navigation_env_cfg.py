@@ -29,13 +29,13 @@ LOW_LEVEL_ENV_CFG = AnymalCFlatEnvCfg()
 class EventCfg:
     """Configuration for events."""
     randomize_cube_positions = EventTerm(
-    func=franka_stack_events.randomize_object_pose,
-        mode="reset",
-        params={
-            "pose_range": {"x": (-3, 3), "y": (-3, 3), "z": (0.0203, 0.0203), "yaw": (-1.0, 1, 0)},
-            "min_separation": 0.1,
-            "asset_cfgs": [SceneEntityCfg("cube")],
-        },
+        func=franka_stack_events.randomize_object_pose,
+            mode="reset",
+            params={
+                "pose_range": {"x": (-3, 3), "y": (-3, 3), "z": (0.0203, 0.0203), "yaw": (-1.0, 1, 0)},
+                "min_separation": 0.1,
+                "asset_cfgs": [SceneEntityCfg("cube")],
+            },
     )
     reset_base = EventTerm(
         func=mdp.reset_root_state_uniform,

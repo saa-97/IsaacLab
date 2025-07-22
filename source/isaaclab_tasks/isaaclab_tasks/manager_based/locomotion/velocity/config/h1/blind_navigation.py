@@ -18,7 +18,6 @@ import isaaclab_tasks.manager_based.navigation.mdp as mdp
 import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
 # from isaaclab_tasks.manager_based.locomotion.velocity.velocity_env_cfg import LocomotionVelocityRoughEnvCfg, RewardsCfg
 from isaaclab_tasks.manager_based.locomotion.velocity.config.h1.h1_navigation_cfg import LocomotionVelocityRoughEnvCfg, RewardsCfg
-
 # from omni.isaac.lab.managers import TimedataCfg
 ##
 # Pre-defined configs
@@ -74,7 +73,7 @@ class H1Rewards(RewardsCfg):
         },
     )
 
-#navigation related code from blind_3 paper
+# code taken from paper for quadruped navigation
 
     terminal_reward = RewTerm(
         func=mdp.compute_terminal_reward,
@@ -218,10 +217,11 @@ class H1RoughEnvCfg_PLAY(H1RoughEnvCfg):
         self.commands.base_velocity.ranges.ang_vel_z = (-1.0, 1.0)
         self.commands.base_velocity.ranges.heading = (0.0, 0.0)
         self.commands.base_velocity.debug_vis = False
-        self.commands.pose_command.debug_vis = False
+        self.commands.pose_command.debug_vis = True
         # disable randomization for play
         self.observations.policy.enable_corruption = False
         # remove random pushing
+        self.actions.pre_trained_policy_action.debug_vis = False
         self.events.base_external_force_torque = None
         self.events.push_robot = None
 
