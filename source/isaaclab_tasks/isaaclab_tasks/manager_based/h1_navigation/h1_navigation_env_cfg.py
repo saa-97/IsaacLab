@@ -3,7 +3,6 @@ import torch
 from dataclasses import MISSING
 from isaaclab.utils.math import quat_rotate_inverse
 import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
-import isaaclab_tasks.manager_based.h1_navigation.mdp as h1_nav_mdp
 import isaaclab.sim as sim_utils
 from isaaclab.assets import ArticulationCfg, AssetBaseCfg
 from isaaclab.envs import ManagerBasedRLEnvCfg
@@ -21,6 +20,7 @@ from isaaclab.utils import configclass
 from isaaclab.utils.assets import ISAAC_NUCLEUS_DIR, ISAACLAB_NUCLEUS_DIR
 from isaaclab.utils.noise import AdditiveUniformNoiseCfg as Unoise
 # from omni.isaac.lab.terrains import TerrainImporterCfg  # Uncomment this line
+import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
 from isaaclab_tasks.manager_based.locomotion.velocity.config.h1.flat_env_cfg import H1FlatEnvCfg
 from isaaclab_assets import H1_MINIMAL_CFG  # isort: skip
 from isaaclab.assets import RigidObjectCfg  # Add this import
@@ -63,7 +63,7 @@ class MySceneCfg(InteractiveSceneCfg):
         offset=RayCasterCfg.OffsetCfg(pos=(0.0, 0.0, 20.0)),
         # attach_yaw_only=True,
         ray_alignment="yaw",
-        pattern_cfg=patterns.GridPatternCfg(resolution=0.1, size=(1.6, 1.0)),
+        pattern_cfg=patterns.GridPatternCfg(resolution=0.1, size=[1.6, 1.0]),
         debug_vis=False,
         mesh_prim_paths=["/World/ground"],
     )
@@ -91,9 +91,9 @@ class CommandsCfg:
         heading_control_stiffness=0.5,
         debug_vis=False,
         ranges=mdp.UniformVelocityCommandCfg.Ranges(
-            lin_vel_x=(-0.8, 0.8),  # Reduced from 1.0 to prevent aggressive movement
-            lin_vel_y=(-0.6, 0.6),  # Reduced lateral movement
-            ang_vel_z=(-0.8, 0.8),  # Reduced angular velocity to prevent spinning
+            lin_vel_x=(-1.0, 1.0), 
+            lin_vel_y=(-1.0, 1.0), 
+            ang_vel_z=(-1.0, 1.0), 
             heading=(-math.pi, math.pi)
         ),
     )
@@ -102,11 +102,11 @@ class CommandsCfg:
         simple_heading=False,
         resampling_time_range=(12, 18),  # Longer episodes for better learning
         debug_vis=True,
-        # Generate a tensor with [pos_x, pos_y, heading] - forward-biased targets
+        # Generate a tensor with [pos_x, pos_y, heading]
         ranges=mdp.UniformPose2dCommandCfg.Ranges(
-            pos_x=(0.5, 3.0),   # Targets mostly in front of robot
-            pos_y=(-2.0, 2.0),  # Allow side targets but prefer forward
-            heading=(-math.pi/3, math.pi/3)  # Limit heading range to prevent extreme turns
+            pos_x=(-2.5, 2.5),  # Slightly reduced range for more achievable targets
+            pos_y=(-2.5, 2.5),  # Slightly reduced range for more achievable targets
+            heading=(-math.pi, math.pi)
         ),
     )
 
@@ -116,11 +116,12 @@ class ActionsCfg:
     """Action specifications for the MDP."""
 
     # joint_pos = mdp.JointPositionActionCfg(asset_name="robot", joint_names=[".*"], scale=0.5, use_default_offset=True)
-    pre_trained_policy_action: h1_nav_mdp.PreTrainedPolicyActionCfg = h1_nav_mdp.PreTrainedPolicyActionCfg (
+    pre_trained_policy_action: mdp.PreTrainedPolicyActionCfg = mdp.PreTrainedPolicyActionCfg (
         asset_name="robot",
         # policy_path="/home/vc/IsaacLab/logs/rsl_rl/h1_flat/2025-07-09_16-47-24/exported/policy.pt",
-        policy_path=r"D:\Clean_install\IsaacLab\logs\rsl_rl\h1_flat\2025-07-09_17-39-31\exported\policy.pt",
-        # policy_path=r"C:\Users\ansaris\Desktop\h1_policy.pt",
+        # policy_path=r"D:\Clean_install\IsaacLab\logs\rsl_rl\h1_flat\2025-07-09_17-39-31\exported\policy.pt",
+        policy_path=r"C:\Users\ansaris\Desktop\h1_policy.pt",
+
         low_level_decimation=4,
         low_level_actions=LOW_LEVEL_ENV_CONFG.actions.joint_pos,
         low_level_observations=LOW_LEVEL_ENV_CONFG.observations.policy,
@@ -217,15 +218,14 @@ class EventCfg:
         func=mdp.reset_root_state_uniform,
         mode="reset",
         params={
-            # Reduce initial position variation and yaw range to prevent problematic starts
-            "pose_range": {"x": (-0.2, 0.2), "y": (-0.2, 0.2), "yaw": (-0.5, 0.5)},  # Much smaller yaw range
+            "pose_range": {"x": (-0.5, 0.5), "y": (-0.5, 0.5), "yaw": (-3.14, 3.14)},
             "velocity_range": {
-                "x": (-0.2, 0.2),  # Reduced initial velocities
-                "y": (-0.2, 0.2),
-                "z": (-0.1, 0.1),
-                "roll": (-0.1, 0.1),
-                "pitch": (-0.1, 0.1),
-                "yaw": (-0.2, 0.2),  # Reduced angular velocity
+                "x": (-0.5, 0.5),
+                "y": (-0.5, 0.5),
+                "z": (-0.5, 0.5),
+                "roll": (-0.5, 0.5),
+                "pitch": (-0.5, 0.5),
+                "yaw": (-0.5, 0.5),
             },
         },
     )
@@ -252,70 +252,19 @@ class EventCfg:
 class RewardsCfg:
     """Reward terms for the MDP."""
 
-    # -- Navigation rewards
-    position_tracking = RewTerm(
-        func=h1_nav_mdp.position_command_error_tanh_combined,
-        weight=2.0,
-        params={
-            "command_name": "pose_command",
-            "coarse_std": 2.0,     # Coarse reward for getting into general area
-            "fine_std": 0.5,       # Fine reward for precise positioning 
-            "fine_thresh": 1.0     # Switch to fine-grained when within 1m
-        }
-    )
-    
-    # Reward smooth velocity alignment toward target
-    velocity_direction_alignment = RewTerm(
-        func=h1_nav_mdp.velocity_direction_alignment,
-        weight=1.0,
-        params={
-            "command_name": "pose_command",
-            "std": 0.5
-        }
-    )
-    
-    # Reward standing still when close to target
-    stand_still_at_target = RewTerm(
-        func=h1_nav_mdp.reward_stand_still_at_target,
-        weight=1.5,
-        params={
-            "command_name": "pose_command",
-            "dist_thresh": 0.3,     # Consider "at target" when within 30cm
-            "lin_vel_std": 0.2,     # Reward low linear velocity
-            "ang_vel_std": 0.3      # Reward low angular velocity
-        }
-    )
-
-    # -- Basic locomotion rewards (kept from original but with adjusted weights)
+    # -- task
     track_lin_vel_xy_exp = RewTerm(
-        func=mdp.track_lin_vel_xy_exp, weight=0.5, params={"command_name": "base_velocity", "std": math.sqrt(0.25)}
+        func=mdp.track_lin_vel_xy_exp, weight=1.0, params={"command_name": "base_velocity", "std": math.sqrt(0.25)}
     )
     track_ang_vel_z_exp = RewTerm(
-        func=mdp.track_ang_vel_z_exp, weight=0.3, params={"command_name": "base_velocity", "std": math.sqrt(0.25)}
+        func=mdp.track_ang_vel_z_exp, weight=0.5, params={"command_name": "base_velocity", "std": math.sqrt(0.25)}
     )
-    
-    # -- Stability penalties (increased weights to prevent rapid turning/jumping)
-    lin_vel_z_l2 = RewTerm(func=mdp.lin_vel_z_l2, weight=-3.0)  # Increased penalty for vertical motion
-    ang_vel_xy_l2 = RewTerm(func=mdp.ang_vel_xy_l2, weight=-0.1)  # Increased penalty for roll/pitch
-    
-    # Heavily penalize excessive angular velocity to prevent spinning
-    excessive_ang_vel_penalty = RewTerm(
-        func=h1_nav_mdp.excessive_ang_vel_penalty,
-        weight=2.0,
-        params={"threshold": 1.0}
-    )
-    
-    # Penalty for excessive linear velocity (prevents jumping)
-    excessive_lin_vel_penalty = RewTerm(
-        func=h1_nav_mdp.excessive_lin_vel_penalty,
-        weight=1.0,
-        params={"threshold": 2.0}
-    )
-    
+    # -- penalties
+    lin_vel_z_l2 = RewTerm(func=mdp.lin_vel_z_l2, weight=-2.0)
+    ang_vel_xy_l2 = RewTerm(func=mdp.ang_vel_xy_l2, weight=-0.05)
     dof_torques_l2 = RewTerm(func=mdp.joint_torques_l2, weight=-1.0e-5)
     dof_acc_l2 = RewTerm(func=mdp.joint_acc_l2, weight=-2.5e-7)
     action_rate_l2 = RewTerm(func=mdp.action_rate_l2, weight=-0.01)
-    
     feet_air_time = RewTerm(
         func=mdp.feet_air_time,
         weight=0.125,
@@ -330,10 +279,9 @@ class RewardsCfg:
         weight=-1.0,
         params={"sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*THIGH"), "threshold": 1.0},
     )
-    
-    # -- Optional penalties
-    flat_orientation_l2 = RewTerm(func=mdp.flat_orientation_l2, weight=-0.5)  # Encourage upright posture
-    dof_pos_limits = RewTerm(func=mdp.joint_pos_limits, weight=-0.5)  # Prevent extreme joint positions
+    # -- optional penalties
+    flat_orientation_l2 = RewTerm(func=mdp.flat_orientation_l2, weight=0.0)
+    dof_pos_limits = RewTerm(func=mdp.joint_pos_limits, weight=0.0)
 
 
 @configclass
@@ -344,18 +292,6 @@ class TerminationsCfg:
     base_contact = DoneTerm(
         func=mdp.illegal_contact,
         params={"sensor_cfg": SceneEntityCfg("contact_forces", body_names="base"), "threshold": 1.0},
-    )
-    
-    # Terminate if robot spins too fast (prevents out-of-control behavior)
-    excessive_ang_vel = DoneTerm(
-        func=h1_nav_mdp.excessive_ang_vel_termination,
-        params={"threshold": 3.0}
-    )
-    
-    # Terminate if robot moves too fast (prevents jumping/unrealistic motion)
-    excessive_lin_vel = DoneTerm(
-        func=h1_nav_mdp.excessive_lin_vel_termination,
-        params={"threshold": 3.0}
     )
 
 # @configclass
@@ -390,7 +326,7 @@ class LocomotionVelocityRoughEnvCfg(ManagerBasedRLEnvCfg):
         """Post initialization."""
         # general settings
         self.decimation = 4
-        self.episode_length_s = 20  # Increased to allow more time for smooth navigation
+        self.episode_length_s = 15  # Longer episodes for more learning opportunities
         # simulation settings
         self.sim.dt = 0.005
 
@@ -398,10 +334,6 @@ class LocomotionVelocityRoughEnvCfg(ManagerBasedRLEnvCfg):
         self.sim.disable_contact_processing = True
         # self.sim.physics_material = self.scene.terrain.physics_material
         self.sim.physx.gpu_max_rigid_patch_count = 10 * 2**15
-        
-        # Set robot configuration
-        self.scene.robot = H1_MINIMAL_CFG.replace(prim_path="{ENV_REGEX_NS}/Robot")
-        
         # update sensor update periods
         # we tick all the sensors based on the smallest update period (physics update period)
         if self.scene.height_scanner is not None:

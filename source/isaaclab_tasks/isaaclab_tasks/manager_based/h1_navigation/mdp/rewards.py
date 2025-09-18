@@ -347,3 +347,29 @@ def velocity_direction_alignment(env: ManagerBasedRLEnv, command_name: str, std:
     reward = torch.exp(alignment / std) * distance_mask * velocity_mask
     
     return reward
+
+
+def excessive_ang_vel_penalty(env: ManagerBasedRLEnv, threshold: float = 1.0) -> torch.Tensor:
+    """Penalize excessive angular velocity to prevent spinning."""
+    ang_vel = torch.abs(env.scene["robot"].data.root_ang_vel_w[:, 2])
+    penalty = -torch.clamp(ang_vel - threshold, min=0.0)**2
+    return penalty
+
+
+def excessive_lin_vel_penalty(env: ManagerBasedRLEnv, threshold: float = 2.0) -> torch.Tensor:
+    """Penalize excessive linear velocity to prevent jumping."""
+    lin_vel = torch.norm(env.scene["robot"].data.root_lin_vel_w[:, :2], dim=1)
+    penalty = -torch.clamp(lin_vel - threshold, min=0.0)**2
+    return penalty
+
+
+def excessive_ang_vel_termination(env: ManagerBasedRLEnv, threshold: float = 3.0) -> torch.Tensor:
+    """Terminate if robot spins too fast."""
+    ang_vel = torch.abs(env.scene["robot"].data.root_ang_vel_w[:, 2])
+    return ang_vel > threshold
+
+
+def excessive_lin_vel_termination(env: ManagerBasedRLEnv, threshold: float = 3.0) -> torch.Tensor:
+    """Terminate if robot moves too fast."""
+    lin_vel = torch.norm(env.scene["robot"].data.root_lin_vel_w[:, :2], dim=1)
+    return lin_vel > threshold

@@ -14,6 +14,7 @@ from isaaclab_tasks.manager_based.locomotion.velocity.velocity_env_cfg import Lo
 # Pre-defined configs
 ##
 from isaaclab_assets import H1_MINIMAL_CFG  # isort: skip
+import math
 
 
 @configclass
@@ -21,15 +22,17 @@ class H1Rewards(RewardsCfg):
     """Reward terms for the MDP."""
 
     termination_penalty = RewTerm(func=mdp.is_terminated, weight=-200.0)
-    lin_vel_z_l2 = None
-    track_lin_vel_xy_exp = RewTerm(
+    track_lin_vel_xy = RewTerm(
         func=mdp.track_lin_vel_xy_yaw_frame_exp,
         weight=1.0,
-        params={"command_name": "base_velocity", "std": 0.5},
+        params={"command_name": "base_velocity", "std": math.sqrt(0.25)},
     )
     track_ang_vel_z_exp = RewTerm(
-        func=mdp.track_ang_vel_z_world_exp, weight=1.0, params={"command_name": "base_velocity", "std": 0.5}
+        func=mdp.track_ang_vel_z_exp, weight=0.5, params={"command_name": "base_velocity", "std": math.sqrt(0.25)}
     )
+
+    alive = RewTerm(func=mdp.is_alive, weight=0.15)
+
     feet_air_time = RewTerm(
         func=mdp.feet_air_time_positive_biped,
         weight=0.25,

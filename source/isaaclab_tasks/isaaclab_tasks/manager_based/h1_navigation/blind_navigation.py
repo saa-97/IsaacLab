@@ -15,9 +15,10 @@ from isaaclab.managers import ObservationTermCfg as ObsTerm
 from isaaclab.utils.noise import AdditiveUniformNoiseCfg as Unoise
 # source/isaaclab_tasks/isaaclab_tasks/manager_based/manipulation/reach/mdp/rewards.py
 import isaaclab_tasks.manager_based.navigation.mdp as mdp
-import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
+# import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
+import isaaclab_tasks.manager_based.h1_navigation.mdp as mdp
 # from isaaclab_tasks.manager_based.locomotion.velocity.velocity_env_cfg import LocomotionVelocityRoughEnvCfg, RewardsCfg
-from isaaclab_tasks.manager_based.locomotion.velocity.config.h1.h1_navigation_cfg import LocomotionVelocityRoughEnvCfg, RewardsCfg
+from isaaclab_tasks.manager_based.h1_navigation.h1_navigation_env_cfg import LocomotionVelocityRoughEnvCfg, RewardsCfg
 # from omni.isaac.lab.managers import TimedataCfg
 ##
 # Pre-defined configs
@@ -224,18 +225,18 @@ class H1RoughEnvCfg_PLAY(H1RoughEnvCfg):
         # make a smaller scene for play
         self.scene.num_envs = 50
         self.scene.env_spacing = 4
-        self.episode_length_s = 20  # Longer episodes for play/testing
+        self.episode_length_s = 10  # Longer episodes for play/testing
 
         self.commands.base_velocity.ranges.lin_vel_x = (0.4, 1.0)  # Good forward speed range
         self.commands.base_velocity.ranges.lin_vel_y = (0.0, 0.0)
         self.commands.base_velocity.ranges.ang_vel_z = (-0.6, 0.6)  # Moderate turning for stability
         self.commands.base_velocity.ranges.heading = (0.0, 0.0)
-        self.commands.base_velocity.debug_vis = False
+        self.commands.base_velocity.debug_vis = True
         self.commands.pose_command.debug_vis = True
         # disable randomization for play
         self.observations.policy.enable_corruption = False
         # remove random pushing
-        self.actions.pre_trained_policy_action.debug_vis = True
+        self.actions.pre_trained_policy_action.debug_vis = False
         self.events.base_external_force_torque = None
         self.events.push_robot = None
 
